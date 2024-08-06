@@ -1,0 +1,265 @@
+/* CartPage.css */
+
+/* Contenedor principal del carrito */
+.cart-page {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: #fff; /* Fondo blanco para el área del carrito */
+  }
+  
+  /* Estilo del título del carrito */
+  .cart-page h1 {
+    font-size: 2em;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  /* Contenedor de los elementos del carrito */
+  .cart-items {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  /* Estilo para cada item del carrito */
+  .cart-item {
+    display: flex;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    gap: 15px;
+    background-color: #f9f9f9;
+    align-items: center; /* Alinea verticalmente */
+    height: 170px;
+  }
+  
+  .cart-item-image {
+    max-width: 150px;
+    border-radius: 8px;
+  }
+  
+  .cart-item-details {
+    flex: 1;
+  }
+  
+  .cart-item-details p{
+    margin-bottom: 2px;
+  }
+  
+  .cart-item-details-price-delete{
+    display: flex;
+    justify-content: space-between; /* Distribuye el espacio entre el precio y el ícono */
+    align-items: center;
+  }
+  
+  .remove-item-icon{
+    margin-right: 15px;
+  }
+  
+  /* Estilo del encabezado del item del carrito */
+  .cart-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .remove-item-icon {
+    color: #d41f1f;
+    cursor: pointer;
+    font-size: 1.5em;
+    transition: color 0.3s;
+  }
+  
+  .remove-item-icon:hover {
+    color: #a11e1e;
+  }
+  
+  /* Estilo para la sección del resumen del carrito */
+  .cart-summary {
+    margin-top: 20px;
+    font-size: 1.5em;
+    color: #333;
+    border-top: 2px solid #ddd;
+    padding-top: 10px;
+  }
+  
+  /* Estilo para la sección de finalizar compra */
+  .checkout-section {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  /* Estilo para el input de email */
+  .email-input {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 100%;
+    font-size: 1em;
+  }
+  
+  
+  .email-input.invalid {
+    border: 1px solid red; /* Borde rojo para email no válido */
+  }
+  
+  .checkout-button:disabled {
+    background-color: #ccc; /* Color del botón cuando está deshabilitado */
+    cursor: not-allowed; /* Cursor cuando el botón está deshabilitado */
+  }
+  
+  
+  /* Estilo para el botón de finalizar compra */
+  .checkout-button {
+    background-color: #d41f1f;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 1.2em;
+    transition: background-color 0.3s;
+  }
+  
+  .checkout-button:hover {
+    background-color: #a11e1e;
+  }
+  
+  /* Mensajes de error y carrito vacío */
+  .error-message, .empty-cart-message {
+    color: #d41f1f;
+    font-size: 1.2em;
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  /* CartPage.css */
+  
+  .empty-cart-container {
+    text-align: center;
+    padding: 50px;
+    
+  }
+  
+  .empty-cart-message {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin: 20px 0;
+  }
+  
+  .empty-cart-icon {
+    font-size: 80px;
+    color: #ff6f61;
+  }
+  
+  .empty-cart-suggestion {
+    font-size: 18px;
+    color: #777;
+    margin-top: 10px;
+  }
+  
+  .empty-cart-button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #ff6f61;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .empty-cart-button:hover {
+    background-color: #e65a50;
+    color: white;
+  }
+  
+  
+  /* Definir la animación */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Aplicar la animación a los items del carrito */
+  .cart-item {
+    opacity: 0;
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+  
+  /* Puedes agregar un retraso en la animación para que los items aparezcan uno tras otro */
+  .cart-item:nth-child(1) {
+    animation-delay: 0s;
+  }
+  
+  .cart-item:nth-child(2) {
+    animation-delay: 0.1s;
+  }
+  
+  .cart-item:nth-child(3) {
+    animation-delay: 0.2s;
+  }
+  
+  .cart-item:nth-child(4) {
+    animation-delay: 0.3s;
+  }
+  
+  .cart-item:nth-child(5) {
+    animation-delay: 0.4s;
+  }
+  
+  .cart-item:nth-child(6) {
+    animation-delay: 0.5s;
+  }
+  
+  .cart-item:nth-child(7) {
+    animation-delay: 0.6s;
+  }
+  
+  
+  
+  /* Y así sucesivamente para los demás items */
+  
+  
+  /* Estilos para el botón de borrar correo */
+  .clear-email-button {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 12px;
+    margin-left: 10px;
+    cursor: pointer;
+  }
+  
+  .clear-email-button:hover {
+    background-color: #ff1a1a;
+  }
+  
+  .clear-email-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  
+  .input-trash{
+    display: flex;
+    justify-content: space-between; /* Distribuye el espacio entre el precio y el ícono */
+    align-items: center;
+  }
+  
+  .input-trash input{
+    margin-right: 20px;
+  }
+  

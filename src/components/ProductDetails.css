@@ -1,0 +1,295 @@
+/* ProductDetails.css */
+
+/* Contenedor principal del detalle del producto */
+.product-details {
+    padding: 20px;
+    max-width: 1200px; /* Aumenta el ancho máximo si es necesario */
+    margin: 20px auto;
+    background-color: #fff; /* Fondo blanco para el área de detalles */
+    text-align: left; /* Alineación del texto a la izquierda */
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Contenedor del carrusel y la información del producto */
+  .product-main-content {
+    display: flex; /* Alinea el carrusel y los detalles en una fila */
+    gap: 20px; /* Espacio entre el carrusel y la información del producto */
+  }
+  
+  /* Estilo para el carrusel de imágenes */
+  .product-carousel {
+    flex: 1; /* Ocupa el espacio disponible */
+  }
+  
+  .product-carousel img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 0px; /* Bordes redondeados para las imágenes */
+  }
+  
+  .carousel .carousel-status {
+    display: none; /* Oculta el número de foto actual */
+  }
+  
+  
+  
+  /* Estilo para la información del producto */
+  .product-info {
+    flex: 1; /* Ocupa el espacio disponible */
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Título del producto */
+  .product-details h1 {
+    margin-bottom: 20px;
+    font-size: 2em;
+    color: #333; /* Color oscuro para el título */
+  }
+  
+  /* Precio del producto */
+  .product-details .price {
+    font-size: 1.5em;
+    color: #d41f1f; /* Color rojo para el precio */
+    margin-bottom: 20px;
+  }
+  
+  /* Descripción del producto */
+  .product-details p {
+    margin-bottom: 10px;
+    font-size: 1.2em;
+    color: #666; /* Color gris oscuro para el texto */
+  }
+  
+  /* Estilo para la categoría del producto */
+  .product-details .category {
+    font-size: 1em;
+    color: #999; /* Color gris claro para la categoría */
+    margin-bottom: 20px;
+  }
+  
+  /* Selector de tamaño y color */
+  /* ProductDetails.css */
+  /* Estilo para el selector de tamaño y color */
+  .selector {
+    margin-bottom: 1rem;
+  }
+  
+  .selector-button {
+    background: #ffffff; /* Fondo blanco para los botones */
+    border: 1px solid #ddd; /* Borde gris claro */
+    border-radius: 4px; /* Bordes redondeados */
+    padding: 10px 15px; /* Espaciado interno del botón */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.3s ease, border-color 0.3s ease; /* Transición suave para el fondo y el borde */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil para un efecto de profundidad */
+  }
+  
+  .selector-button:hover {
+    background-color: #f1f1f1; /* Fondo gris claro al pasar el ratón */
+    border-color: #ccc; /* Borde gris claro al pasar el ratón */
+  }
+  
+  /* Estilo para el selector con error */
+  .selector.error .selector-button {
+    border-color: #d41f1f; /* Borde rojo para indicar error */
+    background-color: #ffe6e6; /* Fondo rojo claro para indicar error */
+  }
+  
+  .selector-options {
+    max-height: 0; /* Oculta el contenido inicialmente */
+    overflow: hidden; /* Oculta el contenido desbordante */
+    transition: max-height 0.3s ease, padding 0.3s ease; /* Transición suave para la altura máxima y el relleno */
+    background: #ffffff; /* Fondo blanco para las opciones */
+    border: 1px solid #ddd; /* Borde gris claro */
+    border-top: none; /* Sin borde superior para una transición suave */
+    border-radius: 0 0 4px 4px; /* Bordes redondeados en la parte inferior */
+  }
+  
+  .selector-options.active {
+    max-height: 300px; /* Valor alto para permitir la expansión, ajusta si es necesario */
+    padding: 10px; /* Espaciado interno del contenido */
+  }
+  
+  .selector-option {
+    padding: 10px;
+    cursor: pointer; /* Cambia el cursor al pasar sobre la opción */
+    border-bottom: 1px solid #ddd; /* Borde inferior gris claro */
+    transition: background-color 0.3s ease; /* Transición suave para el fondo */
+  }
+  
+  .selector-option:last-child {
+    border-bottom: none; /* Sin borde inferior para la última opción */
+  }
+  
+  .selector-option:hover {
+    background: #f1f1f1; /* Fondo gris claro al pasar el ratón */
+  }
+  
+  
+  
+  /* Contenedor y estilo del selector de cantidad */
+  /* Contenedor y estilo del selector de cantidad */
+  .quantity-selector {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 5px; /* Espacio reducido entre los botones y el número */
+  }
+  
+  .quantity-selector button {
+    background-color: #e0e0e0; /* Color de fondo gris claro para los botones */
+    color: #333; /* Color oscuro para el texto en los botones */
+    border: 1px solid #ccc; /* Borde gris claro */
+    border-radius: 4px; /* Bordes redondeados */
+    padding: 8px;
+    font-size: 1em; /* Tamaño de fuente más pequeño */
+    cursor: pointer; /* Cambia el cursor para indicar que se puede hacer clic */
+    outline: none; /* Elimina el borde de enfoque predeterminado */
+    transition: background-color 0.2s ease; /* Transición suave para el cambio de color */
+    flex: 0 0 30px; /* Establece un ancho fijo para los botones */
+    text-align: center; /* Centra el texto dentro del botón */
+  }
+  
+  .quantity-selector button:focus {
+    outline: none; /* Elimina el borde de enfoque al enfocar */
+  }
+  
+  .quantity-selector span {
+    font-size: 1.2em;
+    color: #333; /* Color del texto del selector de cantidad */
+    margin: 0 10px; /* Espacio reducido a los lados del número */
+    text-align: center; /* Centra el número */
+    flex: 1; /* Permite que el número ocupe el espacio restante */
+    min-width: 40px; /* Ancho mínimo para que el número se vea bien */
+    border: 1px solid #ddd; /* Borde gris claro */
+    border-radius: 4px; /* Bordes redondeados */
+    padding: 5px; /* Espaciado interno reducido del número */
+    background-color: #f9f9f9; /* Fondo gris claro */
+  }
+  
+  .quantity-selector button:hover {
+    background-color: #d0d0d0; /* Color más oscuro al pasar el ratón */
+  }
+  
+  
+  /* Botones de acción */
+  .action-buttons {
+    display: flex; /* Usa flexbox para la alineación */
+    flex-direction: column; /* Alinea los botones verticalmente */
+    align-items: center; /* Centra los botones horizontalmente */
+    margin-top: 20px; /* Espacio superior para los botones */
+    gap: 10px; /* Espacio entre los botones */
+  }
+  
+  .action-buttons button {
+    width: 80%; /* Ajusta el ancho de los botones para que se acomoden en el contenedor */
+    padding: 10px 50px;
+    font-size: 1.2em;
+    border: none;
+    border-radius: 50px; /* Bordes redondeados */
+    cursor: pointer; /* Cambia el cursor para indicar que se puede hacer clic */
+    outline: none; /* Elimina el borde de enfoque predeterminado */
+    transition: background-color 0.3s; /* Transición suave para el cambio de color */
+  }
+  
+  .action-buttons .add-to-cart {
+    background-color: #ffffff; /* Fondo blanco */
+    color: #d41f1f; /* Color del texto rojo */
+    border: 2px solid #d41f1f; /* Borde rojo de 2px */
+  }
+  
+  .action-buttons .add-to-cart:hover {
+    background-color: #a11e1e; /* Color más oscuro al pasar el ratón */
+  }
+  
+  .action-buttons .buy-now {
+    background-color: #d41f1f; /* Color de fondo rojo */
+    color: #fff; /* Color del texto en blanco */
+  }
+  
+  .action-buttons .buy-now:hover {
+    background-color: #a11e1e; /* Color más oscuro al pasar el ratón */
+  }
+  
+  /* Sección de productos relacionados */
+  .related-products {
+    margin-top: 50px;
+    padding: 20px;
+    background-color: #f9f9f9; /* Fondo gris claro para diferenciar la sección */
+  }
+  
+  .related-products h2 {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+  }
+  
+  /* Contenedor de los productos relacionados en horizontal */
+  .related-products-container {
+    display: flex;
+    overflow-x: auto; /* Permite el desplazamiento horizontal */
+    gap: 20px; /* Espacio entre los productos */
+    padding: 10px; /* Espacio interno del contenedor */
+    scroll-snap-type: x mandatory; /* Hace que el desplazamiento se detenga en cada producto */
+  }
+  
+  .related-products-container::-webkit-scrollbar {
+    display: none; /* Oculta la barra de desplazamiento en WebKit (Chrome, Safari) */
+  }
+  
+  .product-card {
+    scroll-snap-align: start; /* Alinea el inicio del producto en el contenedor */
+    flex: 0 0 auto; /* Impide que el tamaño del producto se ajuste al contenedor */
+  }
+  
+  /* Estilos para la adaptabilidad en dispositivos móviles */
+  @media (max-width: 768px) {
+    .product-main-content {
+      flex-direction: column; /* En pantallas pequeñas, apila el carrusel y los detalles */
+    }
+  
+    .product-carousel, .product-info {
+      flex: 1 0 auto; /* Ajusta el tamaño en pantallas pequeñas */
+    }
+  
+    .related-products-container {
+      scroll-snap-type: x mandatory; /* Hace que el desplazamiento se detenga en cada producto */
+    }
+  
+    .product-card {
+      flex: 0 0 45%; /* Cada producto ocupa el 45% del ancho del contenedor en pantallas más pequeñas */
+    }
+  }
+  
+  @media (min-width: 769px) {
+    .product-card {
+      flex: 0 0 30%; /* Cada producto ocupa el 30% del ancho del contenedor en pantallas más grandes */
+    }
+  }
+
+  /* ProductDetails.css */
+
+/* Opciones no disponibles */
+.selector-option.not-available {
+  color: gray; /* Color gris para opciones no disponibles */
+  cursor: not-allowed; /* Mostrar cursor de "no permitido" */
+  opacity: 0.6; /* Hacerlas menos visibles */
+}
+
+/* Opciones disponibles */
+.selector-option {
+  cursor: pointer; /* Cursor de mano para opciones disponibles */
+}
+
+
+
+
+
+  
+  
+  
+  

@@ -1,0 +1,269 @@
+/* Contenedor principal del carrito */
+.shipping-page {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: #fff; /* Fondo blanco para el área del carrito */
+  }
+  
+  /* Estilo del título del carrito */
+  .shipping-page h1 {
+    font-size: 2em;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  /* Contenedor de los elementos del carrito */
+  .cart-items {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  /* Estilo para cada item del carrito */
+  .cart-item-sent {
+    display: flex;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    gap: 15px;
+    background-color: #f9f9f9;
+    align-items: center; /* Alinea verticalmente */
+    height: 100px;
+    width: 95%;
+  }
+  
+  .cart-item-sent h2 {
+    margin-bottom: 0px;
+  }
+  
+  .cart-item-image-sent {
+    max-width: 75px;
+    border-radius: 8px;
+  }
+  
+  .cart-item-details {
+    flex: 1;
+  }
+  
+  .cart-item-details p {
+    margin-bottom: 2px;
+  }
+  
+  .cart-item-p-uno {
+    display: flex;
+    justify-content: space-between;
+    margin-right: 15px;
+  }
+  
+  .cart-item-p-dos {
+    display: flex;
+    justify-content: space-between;
+    margin-right: 15px;
+  }
+  
+  /* Estilo del encabezado del item del carrito */
+  .cart-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .remove-item-icon {
+    color: #d41f1f;
+    cursor: pointer;
+    font-size: 1.5em;
+    transition: color 0.3s;
+  }
+  
+  .remove-item-icon:hover {
+    color: #a11e1e;
+  }
+
+/* Contenedor principal del mapa */
+.google-maps {
+  margin-top: 15px; /* Espacio superior para separar del contenido superior */
+  padding: 20px;
+  border: 1px solid #ddd; /* Borde para dar una separación visual */
+  border-radius: 8px; /* Bordes redondeados */
+  background-color: #f9f9f9; /* Fondo ligeramente gris para destacar */
+  position: relative; /* Asegura que los elementos hijos se posicionen dentro del contenedor */
+}
+
+/* Estilo del campo de búsqueda del mapa */
+.map-search-input {
+  width: 100%; /* Ocupa todo el ancho disponible */
+  max-width: 400px; /* Ancho máximo para evitar que se estire demasiado */
+  height: 40px;
+  padding: 0 12px;
+  border-radius: 3px;
+  border: 1px solid #ccc;
+  box-sizing: border-box; /* Incluye padding y borde en el cálculo del ancho */
+  margin-bottom: 15px; /* Espacio debajo del campo de búsqueda */
+}
+
+/* Estilo del mapa */
+.map-container {
+  height: 200px; /* Altura del mapa */
+  width: 100%; /* Ocupa todo el ancho disponible */
+  border-radius: 8px; /* Bordes redondeados del mapa */
+  overflow: hidden; /* Oculta cualquier contenido que se desborde del contenedor */
+}
+
+.more-info {
+  display: flex; /* Use flexbox layout */
+  gap: 10px; /* Space between the elements */
+  align-items: center; /* Align items vertically centered */
+  justify-content: flex-start; /* Align items to the start of the container */
+}
+
+
+.shipping-address {
+  margin-top: 20px; /* Add some space above */
+}
+
+.shipping-address h3 {
+  margin: 0; /* Remove margin */
+  font-size: 1.2em; /* Set font size */
+}
+
+.shipping-address p {
+  margin: 5px 0; /* Add margin for separation */
+  font-size: 1em; /* Set font size */
+}
+
+.email-input, .mobile-input{
+  display: block;
+  margin: 1px 0;
+  padding: 10px;
+  width: 100%;
+  max-width: 400px;
+  font-size: 16px;
+}
+
+.discount-section{
+  margin-top: 20px;
+}
+
+.discount-section-button-input{
+  display: flex;
+  gap: 15px;
+}
+
+
+
+.checkout-button .discount-button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  font-size: 18px;
+  cursor: pointer;
+  background-color: #ffffff; /* Green */
+  color: #d41f1f;
+  border: none;
+  border-radius: 4px;
+  margin-bottom: 50px;
+}
+
+
+
+.discount-input.valid {
+  display: block;
+  margin: 1px 0;
+  padding: 10px;
+  width: 100%;
+  max-width: 400px;
+  font-size: 16px;
+  border-radius: 4px;
+  border: 2px solid #28a745; /* Verde para código válido */
+}
+
+.discount-input.not-found {
+  display: block;
+  margin: 1px 0;
+  padding: 10px;
+  width: 100%;
+  max-width: 400px;
+  font-size: 16px;
+  border-radius: 4px;
+  border: 2px solid #dc3545;
+}
+
+.discount-input.default {
+  display: block;
+  border-radius: 4px;
+  margin: 1px 0;
+  padding: 10px;
+  width: 100%;
+  max-width: 400px;
+  font-size: 16px;
+  border: 2px solid #d1d1d1;
+}
+
+
+.checkout-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+
+.shipping-options {
+  margin-top: 20px;
+}
+
+.shipping-options h3 {
+  margin-bottom: 10px;
+}
+
+.shipping-options label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.shipping-options input[type="radio"] {
+  margin-right: 5px;
+}
+
+
+.cart-summary {
+  margin-top: 20px; /* Space above the summary section */
+}
+
+.cart-summary h3 {
+  font-size: calc(1.3rem + .6vw);
+  margin-bottom: 10px; /* Space below the heading */
+  color: #333; /* Dark gray color for the heading text */
+}
+
+.cart-summary p {
+  margin: 5px 0; /* Space between paragraphs */
+  font-size: calc(1rem + .6vw);
+  color: #555; /* Medium gray color for the text */
+}
+
+.cart-summary h4 {
+  font-size: calc(1.2rem + .6vw);
+  margin-top: 15px; /* Space above the total */
+  color: #000; /* Black color for the total to make it prominent */
+  font-weight: bold; /* Bold font for emphasis */
+  text-align: right; /* Align text to the right for a clean look */
+}
+
+.cart-summary p:last-of-type {
+  font-style: italic; /* Italicize the shipping cost for distinction */
+}
+
+.discount-button {
+  padding: 10px 20px;
+  font-size: 18px;
+  cursor: pointer;
+  background-color: #ffffff; /* White background */
+  color: #d41f1f; /* Red text */
+  border: 2px solid #d41f1f; /* Red border */
+  border-radius: 4px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.discount-button:hover {
+  background-color: #d41f1f; /* Red background on hover */
+  color: #ffffff; /* White text on hover */
+}

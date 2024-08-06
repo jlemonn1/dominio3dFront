@@ -1,0 +1,136 @@
+/* OrderDetails.css */
+.order-details-container {
+  padding: 40px;
+  max-width: 900px;
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+}
+
+.order-details-title {
+  text-align: center;
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+
+.order-details {
+  border-top: 2px solid #e7e7e7;
+  padding-top: 20px;
+}
+
+.order-summary {
+  margin-bottom: 30px;
+  border-bottom: 2px solid #e7e7e7;
+  padding-bottom: 20px;
+}
+
+.order-summary h2 {
+  font-size: 1.8rem;
+  color: #444;
+  margin-bottom: 15px;
+}
+
+.order-summary p {
+  margin: 8px 0;
+  font-size: 1rem;
+  color: #555;
+}
+
+.order-summary p span {
+  font-weight: bold;
+  color: #333;
+}
+
+.order-items h2 {
+  font-size: 1.8rem;
+  color: #444;
+  margin-bottom: 15px;
+}
+
+.order-item {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 25px;
+  padding: 15px;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  transition: box-shadow 0.3s ease;
+}
+
+.order-item:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.product-image {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 5px;
+  margin-right: 20px;
+}
+
+.item-details {
+  flex: 1;
+}
+
+.item-details p {
+  margin: 6px 0;
+  font-size: 1rem;
+  color: #555;
+}
+
+.item-details p span {
+  font-weight: bold;
+  color: #333;
+}
+
+.loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.error-message {
+  color: red;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.order-thanks {
+  padding: 20px;
+  background-color: #f8f8f8;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+
+.order-thanks h2 {
+  font-size: 1.8rem;
+  color: #444;
+  margin-bottom: 15px;
+}
+
+.order-thanks p {
+  margin: 8px 0;
+  font-size: 1rem;
+  color: #555;
+}
+
+.order-thanks a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.order-thanks a:hover {
+  text-decoration: underline;
+}
+
+.iconos{
+  margin-top: 20px;
+  gap: 50px;
+}
+
+.social-icon {
+  font-size: 30px;
+}
