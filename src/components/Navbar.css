@@ -1,126 +1,141 @@
+:root {
+  --color-background: #f7e4bd;
+  --color-text: rgba(26, 16, 16, 0.75);
+  --color-text-hover: rgba(255, 255, 255, 1);
+  --color-navbar-bg: #f7e4bd;
+  --color-offcanvas-bg: #f7e4bd;
+  --color-button-bg: #d41f1f;
+  --color-button-hover: #d2c2a1;
+  --color-icon: rgb(21, 17, 17);
+  --color-icon-hover: rgba(255, 255, 255, 0.75);
+}
+
+/* Navbar styles */
 .navbar-dark .navbar-nav .nav-link {
-    color: rgba(255, 255, 255, 0.75);
-  }
-  
-  .navbar-dark .navbar-nav .nav-link:hover,
-  .navbar-dark .navbar-nav .nav-link:focus {
-    color: rgba(255, 255, 255, 1);
-  }
-  
-  .navbar-brand img {
-    height: 40px;
-  }
-  
-  
-  
-  
-  .offcanvas {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 1050;
-    visibility: hidden;
-    background-color: rgba(0, 0, 0, 0.5);
-    transition: visibility 0s, opacity 0.5s linear;
-    margin-top: 105px;
-  }
-  
-  .offcanvas.show {
-    visibility: visible;
-    opacity: 1;
-  }
-  
-  .offcanvas-header {
-    border-bottom: 1px solid #212529;
-  }
-  
-  .offcanvas-header .btn-close {
-    filter: invert(1);
-  }
-  
-  .offcanvas-title {
-    font-size: 1.25rem;
-    font-weight: 500;
-  }
-  
-  .offcanvas-body {
-    padding: 0px !important;
-  }
-  
-  .offcanvas-body .nav-link {
-    font-size: 1.425rem;
-    margin: 10px 0;
-    margin-left: 15px;
-  }
-  
-  .offcanvas-social {
-    background-color: #333;
-    padding: 20px;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-    box-sizing: border-box;
-  }
-  
-  .offcanvas-social .social-icon {
-    color: white;
-    margin: 0 35px;
-    font-size: 1.5rem;
-  }
-  
-  
-  /* Estilos existentes */
-  
-  /* Oculta el cuadro de búsqueda por defecto */
-  .search-bar {
-    position: absolute;
-    top: -10%; /* Empuja el cuadro de búsqueda fuera de la vista, ligeramente por encima del borde del viewport */
-    left: 0;
-    right: 0;
-    background: #212529; /* Mismo color de fondo que el navbar */
-    padding: 10px;
-    border-bottom: 1px solid #495057; /* Color similar al borde del navbar */
-    z-index: 1030; /* Asegura que esté encima de otros contenidos */
-    transition: top 0.4s ease-in-out; /* Transición suave */
-  }
-  
-  /* Muestra el cuadro de búsqueda cuando está abierto */
-  .search-bar.search-bar-open {
-    top: 110px; /* Ajusta según el alto de tu navbar */
-  }
-  
-  .search-bar form {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .search-bar input {
-    flex: 1;
-    margin-right: 10px;
-    border: 1px solid #495057; /* Mismo color que el borde inferior */
-    border-radius: 4px; /* Bordes redondeados */
-    background: #495057; /* Mismo color de fondo que el navbar */
-    color: #fff; /* Color de texto blanco */
-    padding: 8px; /* Espaciado interno */
-  }
-  
-  .search-bar button {
-    border: none;
-    background: #d41f1f; /* Color del botón (ajusta según preferencia) */
-    color: #fff; /* Color del texto del botón */
-    padding: 8px 16px; /* Espaciado interno */
-    border-radius: 4px; /* Bordes redondeados */
-    cursor: pointer; /* Cursor de mano para el botón */
-  }
-  
-  .search-bar button:hover {
-    background: #911616; /* Color de fondo del botón en hover */
-  }
-  
-  
-  
+  color: var(--color-text) !important;
+}
+
+.navbar-light .navbar-nav .nav-link {
+  color: var(--color-text);
+}
+
+.navbar-dark .navbar-nav .nav-link:hover,
+.navbar-dark .navbar-nav .nav-link:focus {
+  color: var(--color-text-hover) !important;
+}
+
+.navbar {
+  background-color: var(--color-navbar-bg) !important;
+}
+
+/* Icon styles */
+.navbar .nav-link .fa,
+.button .fa {
+  color: var(--color-icon) !important;
+  transition: color 0.3s;
+}
+
+.navbar .nav-link:hover .fa,
+.button:hover .fa {
+  color: var(--color-icon-hover) !important;
+}
+
+.offcanvas {
+  background-color: var(--color-offcanvas-bg) !important;
+  transition: visibility 0s, opacity 0.5s linear;
+  margin-top: 105px;
+}
+
+.offcanvas.show {
+  visibility: visible;
+  opacity: 1;
+}
+
+.offcanvas-header .btn-close {
+  filter: invert(1);
+}
+
+.offcanvas-body {
+  padding: 0px !important;
+}
+
+.offcanvas-body .nav-link {
+  font-size: 1.425rem;
+  margin: 10px 0;
+  margin-left: 15px;
+  color: var(--color-text) !important;
+}
+
+.offcanvas-social {
+  background-color: var(--color-background);
+  padding: 20px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.offcanvas-social .social-icon {
+  color: var(--color-icon) !important;
+  margin: 0 35px;
+  font-size: 1.5rem;
+}
+
+.search-bar {
+  position: absolute;
+  top: -10%;
+  left: 0;
+  right: 0;
+  background: var(--color-background);
+  padding: 10px;
+  border-bottom: 1px solid var(--color-offcanvas-bg);
+  z-index: 1030;
+  transition: top 0.4s ease-in-out;
+}
+
+.search-bar.search-bar-open {
+  top: 105px;
+}
+
+.search-bar form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.search-bar input {
+  flex: 1;
+  margin-right: 10px;
+  border: 1px solid var(--color-offcanvas-bg) !important;
+  border-radius: 4px;
+  background: var(--color-offcanvas-bg) !important;
+  color: var(--color-text-hover);
+  padding: 8px;
+}
+
+.search-bar button {
+  border: none;
+  background: var(--color-button-bg) !important;
+  color: var(--color-text-hover) !important;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.search-bar button:hover {
+  background: var(--color-button-hover) !important;
+}
+
+
+
+.button.btn, .btn-primary {
+  background-color: transparent !important; /* Makes the background transparent */
+  color: var(--color-text) !important; /* Sets the text color */
+  border: none !important; /* Removes the border */
+}
+
+.button:hover, .navbar .button.btn:hover, .btn-primary:hover {
+  background-color: var(--color-button-hover) !important;
+}

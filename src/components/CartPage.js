@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FaTrashAlt, FaShoppingCart } from 'react-icons/fa'; // Importa los íconos necesarios
 import { useNavigate } from 'react-router-dom'; // Importa el hook useNavigate
+import { config } from './config';
 import './CartPage.css';
 
 const CartPage = () => {
@@ -9,6 +10,7 @@ const CartPage = () => {
   const [error, setError] = useState('');
   const [isEmailValid, setIsEmailValid] = useState(true); // Nuevo estado para la validez del email
   const navigate = useNavigate(); // Inicializa useNavigate
+  const apiUrl = config.apiUrl;
 
   useEffect(() => {
     const userEmail = getCookie('userEmail');
@@ -54,7 +56,7 @@ const CartPage = () => {
     const encodedEmail = encodeURIComponent(email);
     console.log('Encoded Email for fetch:', encodedEmail);
 
-    fetch(`http://localhost:8080/api/carts/email/${encodedEmail}`)
+    fetch(`${apiUrl}/api/carts/email/${encodedEmail}`)
       .then(response => {
         if (response.ok) {
           return response.json();
@@ -87,57 +89,57 @@ const CartPage = () => {
         const encodedEmail = encodeURIComponent(email);
         console.log(`Intentando eliminar el carrito existente para el email: ${encodedEmail}`);
 
-        fetch(`http://localhost:8080/api/carts/email/${encodedEmail}`, {
+        fetch(`${apiUrl}/api/carts/email/${encodedEmail}`, {
           method: 'DELETE'
         })
-        .then(response => {
-          if (!response.ok) {
-            throw new Error('Error al eliminar el carrito anterior.');
-          }
-          console.log('Carrito eliminado exitosamente');
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('Error al eliminar el carrito anterior.');
+            }
+            console.log('Carrito eliminado exitosamente');
 
-          document.cookie = `userEmail=${encodeURIComponent(email)}; path=/`;
-          const totalPrice = calculateTotalPrice();
-          const cartData = {
-            userEmail: email,
-            totalPrice: parseFloat(totalPrice),
-            cartItems: cart.map(item => ({
-              product: { id: item.product.id },
-              color: item.color || 'Normal',
-              size: item.size || 'Normal',
-              quantity: item.quantity
-            }))
-          };
+            document.cookie = `userEmail=${encodeURIComponent(email)}; path=/`;
+            const totalPrice = calculateTotalPrice();
+            const cartData = {
+              userEmail: email,
+              totalPrice: parseFloat(totalPrice),
+              cartItems: cart.map(item => ({
+                product: { id: item.product.id },
+                color: item.color || 'Normal',
+                size: item.size || 'Normal',
+                quantity: item.quantity
+              }))
+            };
 
-          console.log('Enviando datos del carrito:', JSON.stringify(cartData));
+            console.log('Enviando datos del carrito:', JSON.stringify(cartData));
 
-          return fetch('http://localhost:8080/api/carts', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(cartData)
+            return fetch(`${apiUrl}/api/carts`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(cartData)
+            });
+          })
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('Error al subir el carrito al servidor.');
+            }
+            console.log('Carrito subido exitosamente');
+            return response.json();
+          })
+          .then(data => {
+            if (data) {
+              setCart(data.cartItems);
+              navigate(`/envio/${emailInput}`);
+            } else {
+              setError('Hubo un problema al subir el carrito.');
+            }
+          })
+          .catch(error => {
+            console.error('Error al procesar la solicitud:', error);
+            setError('Hubo un problema al procesar la solicitud.');
           });
-        })
-        .then(response => {
-          if (!response.ok) {
-            throw new Error('Error al subir el carrito al servidor.');
-          }
-          console.log('Carrito subido exitosamente');
-          return response.json();
-        })
-        .then(data => {
-          if (data) {
-            setCart(data.cartItems);
-            navigate(`/envio/${emailInput}`);
-          } else {
-            setError('Hubo un problema al subir el carrito.');
-          }
-        })
-        .catch(error => {
-          console.error('Error al procesar la solicitud:', error);
-          setError('Hubo un problema al procesar la solicitud.');
-        });
       } else {
         console.log('Carrito ya existente, actualizando estado');
         fetchCartItems(email);
@@ -152,19 +154,19 @@ const CartPage = () => {
     const itemToRemove = cart[index];
     const newCart = cart.filter((_, i) => i !== index);
     setCart(newCart);
-  
+
     const userEmail = getCookie('userEmail');
     if (userEmail) {
       const encodedEmail = decodeEmail(userEmail);
-      fetch(`http://localhost:8080/api/carts/email/${encodedEmail}/items/${itemToRemove.id}`, {
+      fetch(`${apiUrl}/api/carts/email/${encodedEmail}/items/${itemToRemove.id}`, {
         method: 'DELETE'
       })
-      .catch(error => console.error('Error al eliminar el producto del carrito:', error));
+        .catch(error => console.error('Error al eliminar el producto del carrito:', error));
     } else {
       localStorage.setItem('cart', JSON.stringify(newCart));
     }
   };
-  
+
 
   const calculateTotalPrice = () => {
     return cart.reduce((total, item) => total + item.product.price * item.quantity, 0).toFixed(2);
@@ -209,11 +211,16 @@ const CartPage = () => {
       <div className="cart-items">
         {cart.map((item, index) => (
           <div key={index} className="cart-item">
-            {item.product.urlImg && item.product.urlImg.length > 0 ? (
-              <img src={item.product.urlImg[0]} alt={item.product.name} className="cart-item-image" />
+            {item.product.images && item.product.images.length > 0 ? (
+              <img
+                src={`${apiUrl}${item.product.images[0]}`} // Cambia aquí para usar la URL de tu servidor
+                alt={item.product.name}
+                className="cart-item-image"
+              />
             ) : (
               <div className="cart-item-placeholder">No image available</div>
             )}
+
             <div className="cart-item-details">
               <div className="cart-item-header">
                 <h2>{item.product.name}</h2>
@@ -237,23 +244,24 @@ const CartPage = () => {
           <input
             type="email"
             value={emailInput}
-            onChange={handleEmailChange} // Usa la nueva función de manejo
+            onChange={handleEmailChange}
             placeholder="Tu email"
-            className={`email-input ${!isEmailValid && !getCookie('userEmail') ? 'invalid' : ''}`} // Aplica clase condicional
-            readOnly={!!getCookie('userEmail')} // Hacer el input de solo lectura si hay un correo electrónico
+            className={`email-input ${!isEmailValid && !getCookie('userEmail') ? 'invalid' : ''}`}
+            readOnly={!!getCookie('userEmail')}
           />
           <FaTrashAlt className="remove-item-icon" onClick={handleClearEmail} />
         </div>
-        <button 
-          className="checkout-button" 
-          onClick={handleEmailSubmit} 
-          disabled={!emailInput.trim() || !isEmailValid} // Deshabilita el botón si el email está vacío o no es válido
+        <button
+          className="checkout-button"
+          onClick={handleEmailSubmit}
+          disabled={!emailInput.trim() || !isEmailValid}
         >
           Continuar con envio
         </button>
       </div>
     </div>
   );
+
 };
 
 export default CartPage;

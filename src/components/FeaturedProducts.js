@@ -2,14 +2,17 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ProductCard from './ProductCard';
 import './FeaturedProducts.css'; // Asegúrate de importar el CSS para el contenedor de productos
+import Categories from './category/Categories';
+import { config } from './config';
 
 const FeaturedProducts = () => {
   const [products, setProducts] = useState([]);
   const productRefs = useRef([]);
   const navigate = useNavigate();
+  const apiUrl = config.apiUrl;
 
   useEffect(() => {
-    fetch('http://localhost:8080/api/products')
+    fetch(`${apiUrl}/api/products`)
       .then(response => response.json())
       .then(data => setProducts(data))
       .catch(error => console.error('Error fetching products:', error));
@@ -50,18 +53,26 @@ const FeaturedProducts = () => {
   return (
     <div className="featured-products">
       {products.map((product, index) => (
-        <div
-          key={product.id} // Utiliza el ID del producto en lugar del índice
-          className="product-card-wrapper"
-          ref={el => productRefs.current[index] = el}
-        >
-          <ProductCard 
-            title={product.name}
-            price={product.price}
-            image={product.urlImg[0]} // Tomar la primera imagen del array urlImg
-            onClick={() => handleProductClick(product.id)} // Llama a handleProductClick con el ID del producto
-          />
-        </div>
+        <React.Fragment key={product.id}>
+          <div
+            className="product-card-wrapper"
+            ref={el => productRefs.current[index] = el}
+          >
+            <ProductCard 
+              title={product.name}
+              price={product.price}
+              image={`${apiUrl}${product.images[0]}`} // Cambiado para usar la URL del servidor
+              onClick={() => handleProductClick(product.id)} // Llama a handleProductClick con el ID del producto
+            />
+          </div>
+
+          {/* Mostrar el componente intermedio después de los primeros 5 productos */}
+          {/*(index + 1) % 2 === 0 && index + 1 < products.length && (
+            <div className="full-width-category">
+              <Categories />
+            </div>
+          ) */}
+        </React.Fragment>
       ))}
     </div>
   );

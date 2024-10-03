@@ -1,39 +1,59 @@
+:root {
+  --color-background-shopnow: #f7e4bd;
+  --color-text-border-shopnow: rgba(26, 16, 16, 0.75);
+}
+
 .promo-banner {
-    text-align: center;
-    padding: 0; /* Elimina el padding del contenedor */
-    background-color: #fff; /* Ajusta el fondo si es necesario */
-  }
-  
-  .promo-video {
-    width: 100%;
-    overflow: hidden; /* Asegura que el contenido no se desborde */
-    height: 190px;
-  }
-  
-  .promo-video video {
-    width: 100%; /* Hace que el video ocupe el 100% del ancho */
-    height: auto; /* Mantiene la proporción del video */
-    margin-top: 0; /* Asegura que no haya margen superior */
-    margin-left: 0;
-    display: block; /* Elimina el espacio inferior de los elementos inline */
-  }
-  
-  .shop-now {
-    background-color: #ffffff; /* Fondo blanco */
-    color: #d41f1f; /* Color del texto rojo */
-    border: 2px solid #d41f1f; /* Borde rojo de 2px */
-    padding: 10px 20px;
-    font-size: 1rem;
-    cursor: pointer;
-    border-radius: 50px; /* Bordes redondeados */
-    margin-top: 25px;
-  }
-  
-  .shop-now:hover {
-    background-color: #f8d7da; /* Fondo rojo claro al hacer hover */
-  }
-  
-  .promo-banner p {
-    margin: 10px 0; /* Ajusta el margen de los párrafos */
-  }
-  
+  text-align: center;
+  padding: 0;
+  background-color: #fff;
+  position: relative; /* Necesario para el posicionamiento absoluto de los elementos */
+}
+
+.promo-video {
+  width: 100%;
+  overflow: hidden;
+}
+
+.promo-video img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.promo-video video {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.promo-content {
+  position: absolute;
+  top: 45%; /* Centra verticalmente */
+  left: 50%; /* Centra horizontalmente */
+  transform: translate(-50%, -50%); /* Ajusta la posición exacta para centrar */
+  color: #ffffff; /* Color de texto blanco para que destaque sobre la imagen */
+}
+
+
+
+
+
+.shop-now {
+  background-color: var(--color-background-shopnow);
+  color: var(--color-text-border-shopnow);
+  border: 2px solid var(--color-text-border-shopnow);
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 50px;
+  margin-top: 10px;
+}
+
+.shop-now:hover {
+  background-color: #f8d7da;
+}
+
+.promo-banner p {
+  margin: 10px 0;
+}

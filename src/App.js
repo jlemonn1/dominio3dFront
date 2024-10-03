@@ -1,24 +1,31 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import { Routes, Route } from 'react-router-dom';
+import {config } from './components/config';
 import Header from './components/Header';
 import Navbar from './components/Navbar';
 import PromoBanner from './components/PromoBanner';
 import FeaturedProducts from './components/FeaturedProducts';
 import ProductDetails from './components/ProductDetails';
-import Hogar from './components/Hogar';
-import Herramientas from './components/Herramientas';
-import Ninos from './components/Ninos';
-import Friki from './components/Friki';
-import CartPage from './components/CartPage';
 import ShippingPage from './components/ShippingPage';
 import OrderProcessing from './components/OrderProcessing';
 import OrderDetails from './components/OrderDetails';
 import ScrollToTop from './components/ScrollToTop'; // Asegúrate de que el nombre sea correcto
+import CartPage from './components/CartPage';
+import DiscountsManager from './components/admin/DiscountsManager'
+import ProductList from './components/admin/ProductList';
+import AdminOrders from './components/admin/AdminOrders';
+import CategoryPage from './components/CategoryPage';
+import VideoFin from './components/VideoFin';
 
 
-const App = () => (
+const App = () => {
+  useEffect(() => {
+    document.title = config.appName; // Establecer el título dinámicamente
+  }, []);
+
+  return (
   <div className="App">
     <ScrollToTop />
     <Routes>
@@ -28,6 +35,7 @@ const App = () => (
           <Navbar />
           <PromoBanner />
           <FeaturedProducts />
+          {/* <VideoFin /> */}
         </>
       } />
       <Route path="/product/:id" element={
@@ -37,32 +45,11 @@ const App = () => (
           <ProductDetails />
         </>
       } />
-      <Route path="/hogar" element={
+      <Route path="/envio/:email" element={
         <>
           <Header />
           <Navbar />
-          <Hogar />
-        </>
-      } />
-      <Route path="/herramientas" element={
-        <>
-          <Header />
-          <Navbar />
-          <Herramientas />
-        </>
-      } />
-      <Route path="/ninos" element={
-        <>
-          <Header />
-          <Navbar />
-          <Ninos />
-        </>
-      } />
-      <Route path="/friki" element={
-        <>
-          <Header />
-          <Navbar />
-          <Friki />
+          <ShippingPage />
         </>
       } />
       <Route path="/cart" element={
@@ -70,13 +57,6 @@ const App = () => (
           <Header />
           <Navbar />
           <CartPage />
-        </>
-      } />
-      <Route path="/envio/:email" element={
-        <>
-          <Header />
-          <Navbar />
-          <ShippingPage />
         </>
       } />
       <Route path="/orderProcessing/:email/:mobileNumber/:fullAddress/:typeShipping" element={
@@ -91,8 +71,27 @@ const App = () => (
           <OrderDetails />
         </>
       } />
+
+      <Route path="/Dacha33" element={
+        <>
+          <Header />
+          <Navbar />
+          <AdminOrders />
+          <ProductList />
+          <DiscountsManager />
+        </>
+      } />
+      <Route path="/category/:category" element={
+        <>
+        <Header />
+        <Navbar />
+        <CategoryPage/>
+      </>
+    } />
     </Routes>
   </div>
 );
+
+};
 
 export default App;

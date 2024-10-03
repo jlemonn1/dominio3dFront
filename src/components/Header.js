@@ -1,9 +1,10 @@
 import React from 'react';
 import './Header.css'
+import { config } from './config';
 
 const Header = () => (
   <div className="header">
-    Envio gratis con una compra superior a 50€
+    {config.envioGratis ? `Envio gratis con una compra superior a ${config.envioGratis}€` : "Hola que tal"}
   </div>
 );
 

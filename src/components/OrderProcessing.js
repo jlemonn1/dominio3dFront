@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { config } from './config';
 
 import './OrderProcessing.css'; // Ajusta la ruta si es necesario
 
@@ -11,6 +12,7 @@ const OrderProcessing = () => {
 
   const [orderCreated, setOrderCreated] = useState(false);
   const [effectRun, setEffectRun] = useState(false); // Estado para controlar la ejecución del efecto
+  const apiUrl = config.apiUrl;
 
 
 
@@ -22,7 +24,7 @@ const OrderProcessing = () => {
         try {
 
 
-          const cartResponse = await fetch(`http://localhost:8080/api/carts/email/${email}`);
+          const cartResponse = await fetch(`${apiUrl}/api/carts/email/${email}`);
           
           if (!cartResponse.ok) {
             throw new Error('No se encontró un carrito para el correo electrónico proporcionado.');
@@ -43,7 +45,7 @@ const OrderProcessing = () => {
       const createOrderFromCart = async () => {
         try {
 
-          const response = await fetch('http://localhost:8080/api/orders/from-cart', {
+          const response = await fetch(`${apiUrl}/api/orders/from-cart`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/x-www-form-urlencoded',
@@ -71,7 +73,7 @@ const OrderProcessing = () => {
       const verifyPurchase = async (orderId) => {
         try {
 
-          const response = await fetch('http://localhost:8080/api/checkout/verify-purchase', {
+          const response = await fetch(`${apiUrl}/api/checkout/verify-purchase`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/x-www-form-urlencoded',

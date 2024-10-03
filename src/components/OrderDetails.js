@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { FaInstagram, FaWhatsapp, FaPhoneAlt } from 'react-icons/fa';
+import { FaInstagram, FaEnvelope, FaTiktok } from 'react-icons/fa';
 import { useParams } from 'react-router-dom';
+import { config } from './config';
 
 import './OrderDetails.css';
 
@@ -9,11 +10,12 @@ const OrderDetails = () => {
   const [order, setOrder] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
+  const apiUrl = config.apiUrl;
 
   useEffect(() => {
     const fetchOrderDetails = async () => {
       try {
-        const response = await fetch(`http://localhost:8080/api/orders/${id}`);
+        const response = await fetch(`${apiUrl}/api/orders/${id}`);
 
         if (!response.ok) {
           throw new Error('Error al obtener los detalles de la orden');
@@ -64,9 +66,15 @@ const OrderDetails = () => {
             <p>Si tiene alguna pregunta o hay algún problema con su pedido, no dude en <a href="mailto:support@yourcompany.com">contactarnos</a>. Estamos aquí para ayudarle.</p>
             <p>Esperamos verle pronto :)</p>
             <div className="d-flex justify-content-center iconos">
-              <FaWhatsapp className="social-icon" />
-              <FaPhoneAlt className="social-icon" />
-              <FaInstagram className="social-icon" />
+              <a href={`mailto:${config.correo}`} className="social-icon">
+                <FaEnvelope />
+              </a>
+              <a href={`https://www.tiktok.com/@${config.tiktol || "error"}?_t=8pxVIfRQge8&_r=1`} className="social-icon">
+                <FaTiktok />
+              </a>
+              <a href={`https://www.instagram.com/${config.instagram}`} className="social-icon">
+                <FaInstagram />
+              </a>
             </div>
           </div>
         </div>

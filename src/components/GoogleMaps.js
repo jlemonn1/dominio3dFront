@@ -1,4 +1,3 @@
-// GoogleMaps.js
 import React, { useState, useEffect } from 'react';
 import { GoogleMap, LoadScript, Marker, Autocomplete } from '@react-google-maps/api';
 
@@ -23,12 +22,13 @@ const GoogleMaps = ({ onLocationChange, onAddressChange }) => {
   const [streetNumber, setStreetNumber] = useState('');
   const [floor, setFloor] = useState('');
   const [postalCode, setPostalCode] = useState('');
+  const [country, setCountry] = useState(''); // State for the country
 
   useEffect(() => {
     // Notify the parent component about the full address
-    const fullAddress = `${streetName} ${streetNumber} ${floor} ${postalCode}`.trim();
+    const fullAddress = `${streetName} ${streetNumber} ${floor} ${postalCode} ${country}`.trim();
     onAddressChange(fullAddress);
-  }, [streetName, streetNumber, floor, postalCode, onAddressChange]);
+  }, [streetName, streetNumber, floor, postalCode, country, onAddressChange]);
 
   const onPlaceChanged = () => {
     if (autocomplete !== null) {
@@ -42,10 +42,10 @@ const GoogleMaps = ({ onLocationChange, onAddressChange }) => {
         if (onLocationChange) {
           onLocationChange(newPosition); // Notify parent about the new location
         }
-  
+
         // Actualizar la dirección completa en el input
         setStreetName(place.formatted_address || ''); // Usar formatted_address para capturar la dirección completa
-  
+
         // Optionally, update other address components as before
         const addressComponents = place.address_components;
         if (addressComponents) {
@@ -55,17 +55,22 @@ const GoogleMaps = ({ onLocationChange, onAddressChange }) => {
           const postalCodeComponent = addressComponents.find(component =>
             component.types.includes("postal_code")
           );
+          const countryComponent = addressComponents.find(component =>
+            component.types.includes("country")
+          );
           if (streetNumberComponent) {
             setStreetNumber(streetNumberComponent.long_name);
           }
           if (postalCodeComponent) {
             setPostalCode(postalCodeComponent.long_name);
           }
+          if (countryComponent) {
+            setCountry(countryComponent.long_name); // Update the country state
+          }
         }
       }
     }
   };
-  
 
   const mapOptions = {
     fullscreenControl: false,
@@ -109,12 +114,21 @@ const GoogleMaps = ({ onLocationChange, onAddressChange }) => {
             value={floor}
             onChange={(e) => setFloor(e.target.value)} // Update state on change
           />
+        </div>
+        <div className='more-info'>
           <input
             type="text"
             placeholder="Codigo postal:"
             className="map-search-input"
             value={postalCode}
             onChange={(e) => setPostalCode(e.target.value)} // Update state on change
+          />
+          <input
+            type="text"
+            placeholder="Pais:"
+            className="map-search-input"
+            value={country}
+            onChange={(e) => setCountry(e.target.value)} // Update state on change
           />
         </div>
         <div className="map-container">
@@ -133,7 +147,7 @@ const GoogleMaps = ({ onLocationChange, onAddressChange }) => {
 
         {/* Display the concatenated address */}
         <div className="shipping-address">
-          <p>{`${streetName} ${streetNumber} ${floor} ${postalCode}`.trim() || 'Introduce tu dirección'}</p> {/* Show a prompt if no address */}
+          <p>{`${streetName} ${streetNumber} ${floor} ${postalCode} ${country}`.trim() || 'Introduce tu dirección'}</p> {/* Show a prompt if no address */}
         </div>
       </div>
     </LoadScript>

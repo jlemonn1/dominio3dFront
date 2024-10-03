@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import GoogleMaps from './GoogleMaps'; // Asegúrate de que la ruta sea correcta
 import './ShippingPage.css'; // Ajusta la ruta si es necesario
+import { config } from './config';
 
 const ShippingPage = () => {
   const { email } = useParams();
@@ -16,9 +17,10 @@ const ShippingPage = () => {
   const [discountCode, setDiscountCode] = useState('');
   const [discountPercentage, setDiscountPercentage] = useState(0);
   const [discountStatus, setDiscountStatus] = useState('default'); // Estado para el código de descuento
+  const apiUrl = config.apiUrl;
 
   useEffect(() => {
-    fetch(`http://localhost:8080/api/carts/email/${email}`)
+    fetch(`${apiUrl}/api/carts/email/${email}`)
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -61,7 +63,8 @@ const ShippingPage = () => {
   const itemsTotal = parseFloat(calculateItemsTotal());
 
   const getShippingCost = () => {
-    if (itemsTotal > 50) {
+    //ESTO LO HE HECHO YO :)
+    if (itemsTotal >=(config.envioGratis ? config.envioGratis : 999999)) {
       return 0;
     }
     return shippingOption === 'normal' ? 3.99 : 10.99;
@@ -84,7 +87,7 @@ const ShippingPage = () => {
       .replace(/\s+/g, '-')
       .replace(/\//g, '-');
     const shippingCost = getShippingCost();
-    const checkoutUrl = `http://localhost:8080/api/checkout/create-checkout-session?cartEmail=${email}&shippingCost=${shippingCost}&mobileNumber=${mobileNumber}&fullAddress=${formattedAddress}&typeShipping=${shippingOption}&discountName=${discountCode}`;
+    const checkoutUrl = `${apiUrl}/api/checkout/create-checkout-session?cartEmail=${email}&shippingCost=${shippingCost}&mobileNumber=${mobileNumber}&fullAddress=${formattedAddress}&typeShipping=${shippingOption}&discountName=${discountCode}`;
     console.log('Checkout URL:', checkoutUrl);
 
     fetch(checkoutUrl)
@@ -105,7 +108,7 @@ const ShippingPage = () => {
   };
 
   const applyDiscount = () => {
-    fetch(`http://localhost:8080/api/discounts/nombre/${discountCode}`)
+    fetch(`${apiUrl}/api/discounts/nombre/${discountCode}`)
       .then(response => {
         if (!response.ok) {
           throw new Error('Discount not found');
@@ -142,7 +145,7 @@ const ShippingPage = () => {
 
       <div className="shipping-options">
         <h3>Opciones de Envío:</h3>
-        {itemsTotal > 50 ? (
+        {itemsTotal >= (config.envioGratis ? config.envioGratis : 999999) ? (
           <p>Envío gratis</p>
         ) : (
           <div>
@@ -198,7 +201,7 @@ const ShippingPage = () => {
         )}
 
         <p>
-          Envío: {itemsTotal > 50 ? 'Gratis' : `${getShippingCost().toFixed(2)} EUR`}
+          Envío: {itemsTotal >= (config.envioGratis ? config.envioGratis : 999999) ? 'Gratis' : `${getShippingCost().toFixed(2)} EUR`}
         </p>
         <h4>Total: {totalPrice} EUR</h4>
       </div>

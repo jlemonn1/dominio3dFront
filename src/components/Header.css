@@ -1,6 +1,11 @@
+:root {
+  --color-banner: ;
+  --color-text-banner: ;
+}
+
 .header {
-    background-color: #333;
-    color: white;
+    background-color: var(--color-banner) !important;
+    color: var(--color-text-banner) !important;
     text-align: center;
     padding: 10px;
   }

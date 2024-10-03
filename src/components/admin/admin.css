@@ -1,0 +1,148 @@
+/* src/components/admin/admin.css */
+
+/* General container styling */
+.admin-container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.admin-form {
+    margin: 20px 0;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.admin-form label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.admin-form input,
+.admin-form textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    box-sizing: border-box;
+}
+
+.admin-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 10px 0;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.admin-button:hover {
+    background-color: #0056b3;
+}
+
+/* Specific button for delete action */
+.admin-button-delete {
+    background-color: #dc3545;
+}
+
+.admin-button-delete:hover {
+    background-color: #c82333;
+}
+
+/* List styling */
+.admin-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.admin-list-item {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+.admin-item-actions {
+    margin-top: 10px;
+}
+
+.admin-list-item img {
+    width: 100px;
+    height: 100px;
+    margin-right: 10px;
+}
+
+/* Add these styles to admin.css */
+
+/* Flex container for checkbox and label */
+.admin-checkbox-container {
+    display: flex;
+    align-items: center;
+    margin-top: 5px; /* Add some margin for better spacing */
+}
+
+/* Style for the checkbox */
+.admin-checkbox-container input[type="checkbox"] {
+    width: 10%;
+    min-width: 30px; /* Ensures checkbox is not too small */
+    margin-right: 10px; /* Add space between checkbox and label */
+}
+
+/* Style for the label text */
+.admin-checkbox-container span {
+    width: 90%;
+}
+
+.order-info {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 10px; /* Espaciado entre elementos */
+    margin-bottom: 15px;
+  }
+  
+  .order-info span {
+    flex: 1; /* Para que cada elemento ocupe el mismo ancho */
+    min-width: 150px; /* Ancho mínimo para un mejor ajuste */
+  }
+  
+  @media (max-width: 768px) {
+    .order-info {
+      display: grid;
+      grid-template-columns: 1fr 1fr; /* Matriz 2x2 en móviles */
+      gap: 10px;
+    }
+  }
+
+  .order-summary {
+    padding: 10px;
+    margin: 10px 0;
+    background-color: #f9f9f9;
+    transition: background-color 0.3s ease;
+}
+
+.order-summary:hover {
+    background-color: #e9ecef;
+}
+
+.order-summary-item {
+    margin-bottom: 5px;
+    font-size: 16px;
+}
+
+.order-summary-item strong {
+    color: #000000; /* Color para los labels */
+}
+
+/* Línea separadora */
+.order-summary:not(:last-child) {
+    border-bottom: 1px solid #ccc; /* Línea separadora */
+}
