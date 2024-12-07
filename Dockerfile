@@ -26,7 +26,7 @@ FROM nginx:alpine
 COPY --from=build-stage /app/build /usr/share/nginx/html
 
 # Configura el archivo de configuración de Nginx para hacer proxy y servir imágenes
-COPY nginx.conf /etc/nginx/nginx.conf
+COPY serv-dom.conf /etc/nginx/nginx.conf/serv-dom.conf
 
 # Expone el puerto 80 para servir la aplicación
 EXPOSE 80
