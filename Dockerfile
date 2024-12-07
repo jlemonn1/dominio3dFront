@@ -8,7 +8,8 @@ WORKDIR /app
 COPY . /app
 
 # Instala las dependencias
-RUN npm install
+RUN npm install --legacy-peer-deps
+
 
 # Construye el proyecto de React para producción
 RUN npm run build
