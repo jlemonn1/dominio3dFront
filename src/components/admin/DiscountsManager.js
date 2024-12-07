@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import './admin.css';
-import { config } from '../config';
+//import { config } from '../config';
 
-const DiscountsManager = () => {
+const DiscountsManager = ({config}) => {
     const [discounts, setDiscounts] = useState([]);
     const [newDiscount, setNewDiscount] = useState({ nombre: '', porcentaje: 0, numVidas: 0 });
     const apiUrl = config.apiUrl;
@@ -36,8 +36,8 @@ const DiscountsManager = () => {
     };
 
     return (
-        <div className="admin-container">
-            <h2>Descuentos</h2>
+        <div className="admin-container-element">
+            <h3>Descuentos</h3>
             <form onSubmit={handleSubmit} className="admin-form">
                 <label>
                     Nombre:
@@ -61,6 +61,7 @@ const DiscountsManager = () => {
                     </li>
                 ))}
             </ul>
+            <div style={{ borderBottom: '1px solid #000', margin: '10px 0' }}></div>
         </div>
     );
 };

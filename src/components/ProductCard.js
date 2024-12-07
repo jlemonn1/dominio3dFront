@@ -7,10 +7,10 @@ const ProductCard = ({ title, price, image, onClick }) => {
       console.log(`ProductCard clicked: ${title}`); // Debugging
       onClick();
     }}>
-      <img src={image} alt={title} className="product-image" /> {/* Añadido una clase CSS para estilos */}
+      <img src={image} alt={title} className="product-image-normal" /> {/* Añadido una clase CSS para estilos */}
       <div className="product-info">
         <h3>{title}</h3>
-        <p>{price.toFixed(2)} EUR</p> {/* Asegura que el precio tenga dos decimales */}
+        <p>{price ?  price.toFixed(2) : ''}</p> {/* Asegura que el precio tenga dos decimales */}
       </div>
     </div>
   );

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './admin.css'; // Asegúrate de importar los estilos de administración
-import { config } from '../config';
+//import { config } from '../config';
 
-const AdminOrders = () => {
+const AdminOrders = ({config}) => {
     const [orders, setOrders] = useState([]);
     const [expandedOrderId, setExpandedOrderId] = useState(null);
     const apiUrl = config.apiUrl;
@@ -19,8 +19,8 @@ const AdminOrders = () => {
     };
 
     return (
-        <div className="admin-container">
-            <h2>Ordenes</h2>
+        <div className="admin-container-element">
+            <h3>Ordenes</h3>
             {orders.length === 0 ? (
                 <p>No orders available.</p>
             ) : (
@@ -67,6 +67,7 @@ const AdminOrders = () => {
                     ))}
                 </ul>
             )}
+            <div style={{ borderBottom: '1px solid #000', margin: '10px 0' }}></div>
         </div>
     );
 };

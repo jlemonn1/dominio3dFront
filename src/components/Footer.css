@@ -1,0 +1,19 @@
+:root {
+    --footer-bg-color: #f1f1f1;
+    --footer-text-color: #333;
+}
+
+
+.footer {
+    text-align: center;           /* Alinea el texto a la izquierda */
+    padding: 10px 20px;         /* Espaciado interno (ajustable según necesidad) */
+    position: fixed;            /* Fija el footer en la parte inferior */
+    bottom: 0;                  /* Pega el footer a la parte inferior */
+    left: 0;                    /* Pega el footer a la izquierda */
+    width: 100%;                /* Asegura que ocupe todo el ancho de la pantalla */
+    background-color: #f1f1f1;  /* Fondo del footer */
+    color: #333;                /* Color del texto */
+    font-size: 16px;
+    z-index: 1000; 
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* Sombra opcional para darle un poco de profundidad */
+}

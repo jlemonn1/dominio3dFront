@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { FaInstagram, FaEnvelope, FaTiktok } from 'react-icons/fa';
+import { FaInstagram, FaEnvelope, FaTiktok, FaWhatsapp } from 'react-icons/fa';
 import { useParams } from 'react-router-dom';
-import { config } from './config';
+//import { config } from './config';
 
 import './OrderDetails.css';
 
-const OrderDetails = () => {
+const OrderDetails = ({config}) => {
   const { id } = useParams();
   const [order, setOrder] = useState(null);
   const [error, setError] = useState(null);
@@ -69,12 +69,9 @@ const OrderDetails = () => {
               <a href={`mailto:${config.correo}`} className="social-icon">
                 <FaEnvelope />
               </a>
-              <a href={`https://www.tiktok.com/@${config.tiktol || "error"}?_t=8pxVIfRQge8&_r=1`} className="social-icon">
-                <FaTiktok />
-              </a>
-              <a href={`https://www.instagram.com/${config.instagram}`} className="social-icon">
-                <FaInstagram />
-              </a>
+              {config.tiktok ? <a href={`https://www.tiktok.com/@${config.tiktol}?_t=8pxVIfRQge8&_r=1`} className="social-icon"><FaTiktok /></a> : '' }
+              {config.instagram ? <a href={ `https://www.instagram.com/${config.instagram}`} className="social-icon"><FaInstagram /></a> : '' }
+              {config.whatsapp ? <a href={ `https://wa.me/34${config.whatsapp}`} className="social-icon"><FaWhatsapp /></a> : '' }
             </div>
           </div>
         </div>

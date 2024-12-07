@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import GoogleMaps from './GoogleMaps'; // Asegúrate de que la ruta sea correcta
 import './ShippingPage.css'; // Ajusta la ruta si es necesario
-import { config } from './config';
+//import { config } from './config';
 
-const ShippingPage = () => {
+const ShippingPage = ({ config }) => {
   const { email } = useParams();
   const navigate = useNavigate();
   const [cart, setCart] = useState([]);
@@ -14,10 +14,15 @@ const ShippingPage = () => {
   const [isMobileValid, setIsMobileValid] = useState(false);
   const [fullAddress, setFullAddress] = useState('');
   const [shippingOption, setShippingOption] = useState('normal');
+  const [shippingCost, setShippingCost] = useState(0);
   const [discountCode, setDiscountCode] = useState('');
   const [discountPercentage, setDiscountPercentage] = useState(0);
   const [discountStatus, setDiscountStatus] = useState('default'); // Estado para el código de descuento
+  const [pais, setPais] = useState('ESP');
   const apiUrl = config.apiUrl;
+
+
+
 
   useEffect(() => {
     fetch(`${apiUrl}/api/carts/email/${email}`)
@@ -28,7 +33,6 @@ const ShippingPage = () => {
         return response.json();
       })
       .then(data => {
-        console.log('API response:', data);
 
         if (data && data.cartItems && Array.isArray(data.cartItems) && data.cartItems.length > 0) {
           setCart(data.cartItems);
@@ -42,6 +46,18 @@ const ShippingPage = () => {
         navigate('/'); // Redirige a la página principal si ocurre un error
       });
   }, [email, navigate]);
+
+  const handlePaisChange = (e) => {
+    setPais(e.target.value);
+    setShippingCost(getShippingCost(shippingOption, e.target.value));
+
+  };
+
+  const handleShippingOptionChange = (option) => {
+    setShippingOption(option);
+    setShippingCost(getShippingCost(option, pais)); // Actualiza el costo de envío basado en la opción y país seleccionados
+  };
+
 
   const handleEmailChange = (e) => {
     setEmailInput(e.target.value);
@@ -62,13 +78,31 @@ const ShippingPage = () => {
 
   const itemsTotal = parseFloat(calculateItemsTotal());
 
-  const getShippingCost = () => {
-    //ESTO LO HE HECHO YO :)
-    if (itemsTotal >=(config.envioGratis ? config.envioGratis : 999999)) {
+
+  //ESTO LO HE HECHO YO :)
+  const getShippingCost = (shippingType = shippingOption) => {
+    if (itemsTotal >= (config.envioGratis ? config.envioGratis : 999999) && pais === 'ESP') {
       return 0;
     }
-    return shippingOption === 'normal' ? 3.99 : 10.99;
+
+    // Lógica para calcular el costo de envío según el país y la opción seleccionada
+    if (pais === 'ESP') {
+      return shippingType === 'normal' ? 3.99 : 10.99;
+    } else if (pais === 'ESP1') {
+      return shippingType === 'normal' ? 25.90 : 59.30;
+    } else if (pais === 'EUR') {
+      return shippingType === 'normal' ? 25.90 : 59.30;
+    } else if (pais === 'UK') {
+      return shippingType === 'normal' ? 27.40 : 65.30;
+    } else if (pais === 'AUS') {
+      return shippingType === 'normal' ? 122.73 : 208.78;
+    } else if (pais === 'AR') {
+      return shippingType === 'normal' ? 105.35 : 215.51;
+    } else {
+      return 12.99; // Costo por defecto si no coincide ningún país
+    }
   };
+
 
   const calculateDiscount = () => {
     return (itemsTotal * discountPercentage) / 100;
@@ -138,14 +172,33 @@ const ShippingPage = () => {
   return (
     <div className="shipping-page">
       <h1>Dirección de Envío</h1>
+      <div className='pais-selector input-admin' >
+        <select
+          value={pais}
+          onChange={handlePaisChange}
+          className="mobile-input"
+        >
+          <option value="ESP">España (peninsula)</option>
+          <option value="ESP1">España (Baleares y Canarias)</option>
+          <option value="EUR">Europa</option>
+          <option value="UK">Reino Unido e Irlanda</option>
+          <option value="AUS">Australia</option>
+          <option value="AR">Argentina</option>
+        </select>
+      </div>
+
       <GoogleMaps
         onLocationChange={(position) => console.log('Location changed:', position)}
         onAddressChange={setFullAddress}
       />
 
+      
+
+
       <div className="shipping-options">
         <h3>Opciones de Envío:</h3>
-        {itemsTotal >= (config.envioGratis ? config.envioGratis : 999999) ? (
+
+        {(itemsTotal >= (config.envioGratis ? config.envioGratis : 999999) && pais === 'ESP') ? (
           <p>Envío gratis</p>
         ) : (
           <div>
@@ -155,9 +208,9 @@ const ShippingPage = () => {
                 name="shipping"
                 value="normal"
                 checked={shippingOption === 'normal'}
-                onChange={(e) => setShippingOption(e.target.value)}
+                onChange={(e) => handleShippingOptionChange('normal')}
               />
-              Normal (3,99 EUR, 5-7 días)
+              Normal ({getShippingCost('normal').toFixed(2)} EUR, 5-7 días)
             </label>
             <label>
               <input
@@ -165,13 +218,14 @@ const ShippingPage = () => {
                 name="shipping"
                 value="priority"
                 checked={shippingOption === 'priority'}
-                onChange={(e) => setShippingOption(e.target.value)}
+                onChange={(e) => handleShippingOptionChange('priority')}
               />
-              Prioritario (10,99 EUR, 1-2 días)
+              Prioritario ({getShippingCost('priority').toFixed(2)} EUR, 1-2 días)
             </label>
           </div>
         )}
       </div>
+
 
       <div className="discount-section">
         <h3>Código de Descuento:</h3>
@@ -201,12 +255,14 @@ const ShippingPage = () => {
         )}
 
         <p>
-          Envío: {itemsTotal >= (config.envioGratis ? config.envioGratis : 999999) ? 'Gratis' : `${getShippingCost().toFixed(2)} EUR`}
+          Envío: {(itemsTotal >= (config.envioGratis ? config.envioGratis : 999999) && pais === 'ESP') ? 'Gratis' : `${getShippingCost().toFixed(2)} EUR`}
         </p>
         <h4>Total: {totalPrice} EUR</h4>
       </div>
 
       <div className="checkout-section">
+
+
         <input
           type="email"
           value={emailInput}
@@ -223,6 +279,21 @@ const ShippingPage = () => {
           placeholder="Tu número móvil"
           className={`mobile-input ${!isMobileValid && mobileNumber ? 'invalid' : ''}`}
         />
+        <div style={{display : 'flex'}}>
+          <input style={{width:'100%'}}
+            type="text"
+            placeholder="Nombre"
+            className="mobile-input"
+
+          />
+
+          <input style={{width:'100%'}}
+            type="text"
+            placeholder="Apellidos"
+            className="mobile-input"
+
+          />
+        </div>
 
         <button
           className="checkout-button"

@@ -1,0 +1,75 @@
+/* Contenedor principal para los productos destacados */
+.featured-products-container {
+  position: relative;
+  padding: 20px; /* Espaciado lateral para mejorar la presentación */
+  margin-bottom: 100px;
+}
+
+/* Estilo de la cuadrícula de productos destacados */
+.featured-products {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); /* Adaptabilidad a diferentes tamaños de pantalla */
+  gap: 30px; /* Espacio entre los productos */
+  padding: 0px;
+  margin-bottom: 0px;
+  box-sizing: border-box;
+}
+
+/* Estilo individual de la tarjeta de producto */
+.product-card {
+  background-color: #fff; /* Fondo blanco para resaltar el producto */
+  border-radius: 8px; /* Bordes redondeados */
+  overflow: hidden; /* Oculta desbordes */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+  transition: transform 0.3s ease; /* Efecto de escala al pasar el ratón */
+}
+
+/* Efecto al pasar el ratón sobre la tarjeta del producto */
+.product-card:hover {
+  transform: scale(1.05); /* Escala un poco la tarjeta al pasar el ratón */
+}
+
+/* Estilo de la imagen del producto */
+.product-card img {
+  width: 100%; /* Ocupa todo el ancho del contenedor */
+  height: auto; /* Mantiene la relación de aspecto */
+  object-fit: cover; /* Ajusta la imagen sin distorsionar */
+}
+
+/* Estilo del título del producto */
+.product-card h3 {
+  margin: 10px; /* Espaciado alrededor del título */
+  font-size: 1.2em; /* Tamaño del texto */
+  color: #333; /* Color del texto */
+}
+
+/* Estilo del precio del producto */
+.product-card p {
+  margin: 10px; /* Espaciado alrededor del precio */
+  font-size: 1em; /* Tamaño del texto */
+  color: #666; /* Color del texto */
+}
+
+/* Estilo para pantallas medianas */
+@media (max-width: 1200px) {
+  .featured-products {
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* Ajuste de columnas */
+      gap: 25px; /* Reducción de espacio */
+  }
+}
+
+/* Estilo para pantallas pequeñas */
+@media (max-width: 800px) {
+  .featured-products {
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Ajuste de columnas */
+      gap: 20px; /* Reducción de espacio */
+  }
+}
+
+/* Estilo para pantallas muy pequeñas */
+@media (max-width: 568px) {
+  .featured-products {
+      grid-template-columns: repeat(2, 1fr); /* Dos productos por fila en móviles */
+      gap: 15px; /* Reducción de espacio */
+  }
+}

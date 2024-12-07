@@ -3,8 +3,7 @@
 /* Contenedor principal del detalle del producto */
 .product-details {
     padding: 20px;
-    max-width: 1200px; /* Aumenta el ancho máximo si es necesario */
-    margin: 20px auto;
+    width: 100%; /* Aumenta el ancho máximo si es necesario */
     background-color: #fff; /* Fondo blanco para el área de detalles */
     text-align: left; /* Alineación del texto a la izquierda */
     display: flex;
@@ -19,24 +18,27 @@
   
   /* Estilo para el carrusel de imágenes */
   .product-carousel {
-  display: flex;
-  justify-content: center; /* Centra el contenido */
-  align-items: center; /* Centra verticalmente */
-  overflow: hidden; /* Oculta el desbordamiento */
-  transition: height 0.3s ease; /* Transición suave para la altura */
-}
+    max-width: 600px;
+    height: auto; /* Ajusta automáticamente según el contenido *//* Ajusta la altura máxima según tu diseño */
+    width: 100%;
+  }
   
   .product-carousel img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 0px; /* Bordes redondeados para las imágenes */
+    max-height: 600px; /* Mantiene la proporción */
+    object-fit: contain; /* Alternativamente, puedes usar 'cover' si quieres que se recorten */
+    border-radius: 0px;
+    width: 100%;
   }
+  
   
   .carousel .carousel-status {
     display: none; /* Oculta el número de foto actual */
   }
   
   
+  .product-image-details {
+    max-width: 400px;
+  }
   
   /* Estilo para la información del producto */
   .product-info {
@@ -52,6 +54,10 @@
     color: #333; /* Color oscuro para el título */
   }
   
+  .product-details {
+    display: flex;
+  }
+
   /* Precio del producto */
   .product-details .price {
     font-size: 1.5em;
@@ -223,6 +229,7 @@
   /* Sección de productos relacionados */
   .related-products {
     margin-top: 50px;
+    margin-bottom: 150px;
     padding: 20px;
     background-color: #f9f9f9; /* Fondo gris claro para diferenciar la sección */
   }
@@ -291,9 +298,115 @@
 
 
 
+.roduct-carousel-item {
+  max-width: 600px;
+}
 
 
-  
-  
-  
-  
+
+.zoom-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  opacity: 0; /* Comienza invisible */
+  transition: opacity 1.3s ease; /* Transición de opacidad */
+}
+
+.zoom-modal-overlay.show {
+  opacity: 1; /* Cuando se muestra, se vuelve visible */
+}
+
+.zoom-modal {
+  background: white;
+  border-radius: 0px;
+  padding: 0px;
+  max-width: 100%;
+  max-height: 90%;
+  overflow: hidden;
+  position: relative;
+  transform: translateY(-20px); /* Mover el modal hacia arriba inicialmente */
+  transition: transform 1.3s ease; /* Transición para la transformación */
+}
+
+.zoom-modal.show {
+  transform: translateY(0); /* Volver a la posición original */
+}
+
+.zoomed-image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.zoomed-image-container img {
+  width: 100%;
+}
+
+.zoomed-image {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.close-modal {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(244, 203, 127, 0.7);
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: black;
+}
+
+.close-modal:hover {
+  color: rgb(82, 82, 82);
+}
+
+.sizeSelect, .colorSelect {
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.select-container {
+  position: relative; /* Asegura que el contenedor maneje su propio contenido */
+  overflow: visible;  /* Permite que el contenido fluya fuera del contenedor si es necesario */
+}
+
+.react-select__menu {
+  z-index: 1; /* Controla el z-index del menú desplegable */
+  position: relative; /* Evita que se superponga a otros elementos */
+}
+
+.react-select__control {
+  margin-bottom: 1rem; /* Agrega un margen debajo del control para evitar solapamientos */
+}
+
+
+
+.product-description button {
+  background-color: #f7e4bd; /* Color de fondo amarillo */
+  color: #2d2d2d; /* Color de texto blanco */
+  font-size: 16px; /* Tamaño de fuente */
+  padding: 10px 20px; /* Relleno en el botón */
+  border: none; /* Sin borde */
+  border-radius: 5px; /* Bordes redondeados */
+  cursor: pointer; /* Cambia el cursor a mano */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Efecto suave en el cambio de color y escala */
+}
+
+.product-description button:hover {
+  background-color: #e1b867; /* Color más oscuro al pasar el ratón */
+  transform: scale(1.05); /* Aumento de tamaño al hacer hover */
+}
+
+.product-description button:focus {
+  outline: none; /* Eliminar el contorno cuando el botón está enfocado */
+}

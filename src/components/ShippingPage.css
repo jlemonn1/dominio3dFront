@@ -3,6 +3,7 @@
     padding: 20px;
     max-width: 1200px;
     margin: 0 auto;
+    margin-bottom: 100px;
     background-color: #fff; /* Fondo blanco para el área del carrito */
   }
   
@@ -132,12 +133,12 @@
   font-size: 1em; /* Set font size */
 }
 
-.email-input, .mobile-input{
+.email-input, .mobile-input {
   display: block;
   margin: 1px 0;
   padding: 10px;
   width: 100%;
-  max-width: 400px;
+  max-width: 600px;
   font-size: 16px;
 }
 
@@ -266,4 +267,42 @@
 .discount-button:hover {
   background-color: #d41f1f; /* Red background on hover */
   color: #ffffff; /* White text on hover */
+}
+
+
+.pais-selector {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.pais-selector select {
+  appearance: none; /* Para ocultar el estilo predeterminado del navegador */
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #a64a4a;
+  background-color: #ffffff;
+  border: 2px solid #333;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  outline: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.pais-selector select:hover {
+  background-color: #f6cbcb;
+  border-color: #333;
+}
+
+.pais-selector select:focus {
+  background-color: #f6cbcb;
+  border-color: #000000;
+}
+
+.pais-selector select option {
+  color: #333; /* Cambia el color del texto dentro de las opciones */
+  background-color: #fff; /* Fondo de las opciones */
+  width: 100%;
 }

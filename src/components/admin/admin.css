@@ -2,10 +2,13 @@
 
 /* General container styling */
 .admin-container {
-    padding: 20px;
+    padding: 0px;
     max-width: 1200px;
     margin: auto;
+    margin-bottom: 100px;
 }
+
+
 
 .admin-form {
     margin: 20px 0;
@@ -21,11 +24,13 @@
 }
 
 .admin-form input,
-.admin-form textarea {
+.admin-form textarea,
+.admin-form select {
     width: 100%;
     padding: 8px;
     margin-top: 5px;
     box-sizing: border-box;
+    display: block;
 }
 
 .admin-button {
@@ -145,4 +150,448 @@
 /* Línea separadora */
 .order-summary:not(:last-child) {
     border-bottom: 1px solid #ccc; /* Línea separadora */
+}
+
+.category-list ul {
+    list-style-type: none; /* Quita los puntos */
+    padding: 0; /* Quita el padding por defecto */
+    margin: 0; /* Quita el margin por defecto */
+}
+
+
+/* src/components/ProductList.css */
+
+.product-item-container {
+    overflow: hidden;
+    max-height: 0; /* Altura inicial 0 para ocultar el elemento */
+    transition: max-height 0.3s ease-in-out; /* Transición suave */
+}
+
+.product-item-container.visible {
+    max-height: 900px; /* Ajusta este valor según sea necesario para que se ajuste al contenido */
+    transition: max-height 0.3s ease-in-out; /* Transición suave */
+}
+
+.opciones {
+    width: 100%;
+}
+
+.carousel-manager {
+    max-width: 800px; /* Ancho máximo del carrusel */
+    margin: 0 auto; /* Centra el contenedor */
+    padding: 20px;
+    margin-bottom: 10px;
+}
+
+.carousel-container {
+    position: relative; /* Para posicionar elementos dentro */
+    clear: both; /* Asegura que el contenido se apile correctamente */
+}
+
+.upload-section {
+    display: block; /* Mantén el bloque */
+    margin-top: 20px; /* Espacio superior para separar de la imagen */
+    margin-bottom: 20px;
+    clear: both; /* Asegura que se coloque debajo de otros elementos */
+}
+
+.upload-section input{
+    width: 100%;
+    margin-top: 10px; /* Espacio entre input y botón */
+}
+
+.upload-section button {
+    width: 100%;
+    margin-top: 10px; /* Espacio entre input y botón */
+    background-color: #d9534f;
+}
+
+.carousel-item {
+    position: relative; /* Necesario para el botón de eliminar */
+    display: flex;
+    flex-direction: column; /* Alinear imagen y botón verticalmente */
+    align-items: center; /* Centra el contenido */
+    margin-bottom: 20px; /* Añadir margen inferior */
+}
+
+
+.carousel-image {
+    width: 100%; /* Ancho completo */
+    height: auto; /* Mantiene la proporción de la imagen */
+    border-radius: 0px; /* Bordes redondeados */
+    max-height: 500px;
+    min-height: 490px;
+}
+
+.delete-button {
+    position: absolute; /* Posiciona el botón sobre la imagen */
+    bottom: 10px; /* Distancia desde el fondo */
+    left: 50%; /* Centra el botón horizontalmente */
+    transform: translateX(-50%); /* Compensa el ancho del botón para centrarlo */
+    padding: 10px 15px;
+    background-color: #d9534f; /* Color de fondo para el botón de eliminar */
+    color: #fff; /* Color del texto */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.delete-button:hover {
+    background-color: #c9302c; /* Color de fondo al pasar el ratón */
+}
+
+.image-count {
+    text-align: center; /* Centra el texto */
+    margin-top: 20px; /* Espaciado superior */
+}
+
+.config-manager {
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.config-manager label{
+    display: block;
+}
+
+.config-manager input{
+    display: block;
+    width: 100%;
+}
+
+.config-manager select{
+    display: block;
+    width: 100%;
+    background-color: #fffab7cf;
+}
+
+.bf {
+    padding: 20px;
+}
+
+p {
+    margin-bottom: 0px;
+}
+
+.admin-container-element {
+    padding: 20px;
+    background-color: #ffffff;
+}
+
+.category-list {
+    margin-top: 20px;
+}
+
+.category-item {
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #fff;
+    transition: box-shadow 0.3s;
+}
+
+.category-title {
+    font-size: 1.4em;
+    cursor: pointer;
+    color: #212121;
+    text-decoration: none;
+}
+
+.category-title:hover {
+    color: #000000;
+}
+
+.product-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.product-item {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    border-top: 1px solid #ddd;
+}
+
+.product-name {
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    color: #5a5a5a;
+}
+
+.product-name:hover {
+    color: #000000;
+}
+
+.product-image {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    margin-left: 10px;
+}
+
+.no-products {
+    padding-left: 20px;
+    font-style: italic;
+    color: #999;
+    font-size: 0.9em;
+}
+
+.product-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+}
+
+.product-header h3 {
+    margin: 0;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.product-header p {
+    margin: 0;
+    font-size: 1.1em;
+    font-weight: normal;
+    color: #666;
+}
+
+
+/* admin.css */
+
+/* Variantes */
+.variant-list {
+    list-style: none;
+    padding: 0;
+}
+
+.variant-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #f9f9f9;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+.variant-item:hover {
+    background-color: #eef;
+}
+
+.variant-item span {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #333;
+}
+
+.variant-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.variant-buttons button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: #007bff;
+    transition: color 0.2s ease;
+}
+
+.variant-buttons button:hover {
+    color: #0056b3;
+}
+
+.variant-edit-form {
+    background-color: #f3f3f3;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Botón agregar variante */
+.admin-form .admin-button {
+    margin-top: 20px;
+    background-color: #28a745;
+    border: none;
+    padding: 10px 20px;
+    color: white;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.admin-form .admin-button:hover {
+    background-color: #218838;
+}
+
+/* Mensaje de error */
+.error-message {
+    color: red;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+
+.category-manager-admin {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+}
+
+.category-manager-admin h3 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 10px;
+}
+
+.category-form {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.category-input,
+.subcategory-input,
+.file-input {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    font-size: 16px;
+    transition: border-bottom-color 0.3s ease;
+}
+
+.category-input:focus,
+.subcategory-input:focus,
+.file-input:focus {
+    border-bottom-color: #007BFF;
+    outline: none;
+}
+
+.submit-btn,
+.upload-btn,
+.edit-btn,
+.delete-btn,
+.remove-image-btn {
+    padding: 10px 15px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-btn {
+    background-color: #28a745;
+    color: white;
+}
+
+.submit-btn:hover {
+    background-color: #218838;
+}
+
+.upload-btn {
+    background-color: #007BFF;
+    color: white;
+}
+
+.upload-btn:hover {
+    background-color: #0056b3;
+}
+
+.edit-btn {
+    background-color: #ffc107;
+    color: white;
+}
+
+.edit-btn:hover {
+    background-color: #e0a800;
+}
+
+.delete-btn {
+    background-color: #dc3545;
+    color: white;
+}
+
+.delete-btn:hover {
+    background-color: #c82333;
+}
+
+.image-upload-section {
+    margin-top: 20px;
+    border-top: 1px solid #e0e0e0;
+    padding-top: 10px;
+}
+
+.image-preview {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.current-image {
+    width: 100px;
+    margin-right: 10px;
+}
+
+.category-list {
+    margin-top: 20px;
+}
+
+.category-group {
+    margin-bottom: 20px;
+    border-top: 1px solid #e0e0e0;
+    padding-top: 10px;
+}
+
+.category-title {
+    font-size: 20px;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+.subcategory-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.subcategory-item {
+    margin-bottom: 10px;
+    padding: 5px 0;
+    border-bottom: 1px solid #e0e0e0;
+    display: flex;
+    align-items: center;
+}
+
+.subcategory-name {
+    flex-grow: 1;
+    color: #333;
+}
+
+.subcategory-image {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 10px;
 }

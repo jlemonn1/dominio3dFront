@@ -1,7 +1,10 @@
+.categories-container {
+    width: 100%; /* Asegúrate de que ocupa todo el ancho de la pantalla */
+    padding: 20px;
+}
+
 .category-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    position: relative; /* Necesario para el posicionamiento absoluto del fondo */
     cursor: pointer;
     margin: 10px;
     transition: transform 0.2s;
@@ -11,14 +14,25 @@
     transform: scale(1.05);
 }
 
-.category-image {
+.category-background {
     width: 100%;
-    height: auto;
-    border-radius: 8px;
+    height: 200px; /* Ajusta según sea necesario */
+    border-radius: 0px;
+    background-size: cover;
+    background-position: center;
+    display: flex; /* Permite centrar el texto en el fondo */
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(250, 255, 255, 0.1);
 }
 
 .category-info {
+    position: absolute; /* Permite colocar la información sobre el fondo */
     text-align: center;
+    color: black; /* Cambia el color del texto */
+    background-color: rgba(250, 255, 255, 0.7);
+    width: 100%;
+    height: 50%;
 }
 
 .category-title {
@@ -28,11 +42,5 @@
 
 .category-count {
     font-size: 1rem;
-    color: gray;
-}
-
-.categories-container {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
+    color: rgba(10, 10, 10, 0.8); /* Color gris claro */
 }

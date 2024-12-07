@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { config } from './config';
+//import { config } from './config';
 
 import './OrderProcessing.css'; // Ajusta la ruta si es necesario
 
-const OrderProcessing = () => {
+const OrderProcessing = ({config}) => {
 
 
   const navigate = useNavigate();

@@ -1,53 +1,53 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import CategoryCard from './CategoryCard';
-import './Category.css'; // Asegúrate de importar los estilos CSS
+import React, { useState, useEffect } from 'react';
+import Slider from 'react-slick';
+import './Category.css'; // Asegúrate de tener el CSS adecuado
 
-const Categories = () => {
-  const navigate = useNavigate();
+const Categories = ({ config }) => {
+  const [categories, setCategories] = useState({});
 
-  const categories = [
-    {
-      title: 'Hoodies',
-      productCount: 100,
-      image: 'link_to_your_image_for_hoodies', // Sustituir con la URL de la imagen
-      path: '/hoodies',
-    },
-    {
-      title: 'Crewnecks',
-      productCount: 45,
-      image: 'link_to_your_image_for_crewnecks', // Sustituir con la URL de la imagen
-      path: '/crewnecks',
-    },
-    {
-      title: 'T-Shirts',
-      productCount: 152,
-      image: 'link_to_your_image_for_tshirts', // Sustituir con la URL de la imagen
-      path: '/tshirts',
-    },
-    {
-      title: 'Pants & Sweatpants',
-      productCount: 34,
-      image: 'link_to_your_image_for_pants', // Sustituir con la URL de la imagen
-      path: '/pants',
-    },
-  ];
-
-  const handleCategoryClick = (path) => {
-    navigate(path);
+  // Configuración del carrusel
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1, // Número de tarjetas que se mostrarán en cada slide
+    slidesToScroll: 1,
+    autoplay: true, // Habilitar desplazamiento automático
+    autoplaySpeed: 3000, // Velocidad en milisegundos (3000 ms = 3 segundos)
   };
+
+  // Fetch de las categorías
+  useEffect(() => {
+    fetch(`${config.apiUrl}/api/category/categoriesToShow`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Error fetching categories');
+        }
+        return response.json();
+      })
+      .then(data => {
+        setCategories(data);
+      })
+      .catch(error => console.error('Error fetching categories:', error));
+  }, [config.apiUrl]);
 
   return (
     <div className="categories-container">
-      {categories.map((category, index) => (
-        <CategoryCard
-          key={index}
-          title={category.title}
-          productCount={category.productCount}
-          image={category.image}
-          onClick={() => handleCategoryClick(category.path)}
-        />
-      ))}
+      <Slider {...settings}>
+        {Object.keys(categories).length > 0 ? (
+          Object.entries(categories).map(([subCategory, urlImg], index) => (
+            <div key={index} className="category-card" onClick={() => window.location.href = `/category/${subCategory}`}>
+              <div className="category-background" style={{ backgroundImage: `url(${config.apiUrl}${urlImg})` }}>
+                <div className="category-info">
+                  <h3 className="category-title-main">{subCategory}</h3>
+                </div>
+              </div>
+            </div>
+          ))
+        ) : (
+          <div>No hay categorías disponibles</div>
+        )}
+      </Slider>
     </div>
   );
 };

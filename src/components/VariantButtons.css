@@ -1,0 +1,47 @@
+.variant-buttons {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 30px;
+  margin-top: 30px;
+}
+
+.variant-button {
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  position: relative;
+  padding: 5px 10px;
+  color: gray; /* Color gris por defecto */
+  transition: color 0.3s ease;
+  z-index: 1; /* Asegura que el texto esté sobre la imagen */
+}
+
+.variant-button.selected {
+  font-weight: bold;
+  color: black;
+}
+
+.variant-button.selected::after {
+  content: '';
+  position: absolute;
+  bottom: 0; /* Ajusta la distancia de la imagen al botón */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%; /* Ancho completo del botón */
+  height: 100%; /* Alto completo del botón */
+  background: url('/src/components/img/logo.png') no-repeat center;
+  background-size: cover;
+  z-index: -1; /* Coloca la imagen detrás del texto */
+  opacity: 0.5;
+}
+
+.variant-button.disabled {
+  color: gray;
+  text-decoration: line-through;
+  cursor: not-allowed;
+}
+
+.variant-button:hover:not(.disabled):not(.selected) {
+  color: gray;
+}

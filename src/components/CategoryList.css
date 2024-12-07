@@ -1,0 +1,64 @@
+.category-list-container {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto; /* Permite el desplazamiento si hay muchas categorías */
+  gap: 15px; /* Espacio entre los items */
+  padding: 20px;
+  margin-bottom: 40px;
+}
+
+.category-item {
+  height: 200px; /* Altura fija */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-align: center;
+  font-size: 1.8rem;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transición suave */
+  border-radius: 10px; /* Bordes redondeados */
+  overflow: hidden; /* Para que el contenido no se desborde */
+}
+
+.category-item:hover {
+  transform: scale(1.05); /* Efecto de agrandamiento */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Sombra al hacer hover */
+}
+
+.category-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4); /* Fondo oscuro con opacidad */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background 0.3s ease; /* Transición en el fondo */
+}
+
+.category-item:hover .category-overlay {
+  background: rgba(0, 0, 0, 0.6); /* Oscurece más al hacer hover */
+}
+
+.category-title-main {
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  color: #fff;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* Sombra en el texto */
+  font-size: 1.2rem; /* Ajusta el tamaño */
+  transition: color 0.3s ease;
+}
+
+.category-item:hover .category-title-main {
+  color:#939393;
+  /* Cambia el color del texto al hacer hover */
+}

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { FaTrashAlt, FaShoppingCart } from 'react-icons/fa'; // Importa los íconos necesarios
 import { useNavigate } from 'react-router-dom'; // Importa el hook useNavigate
-import { config } from './config';
+////import { config } from './config';
 import './CartPage.css';
 
-const CartPage = () => {
+const CartPage = ({config}) => {
   const [cart, setCart] = useState([]);
   const [emailInput, setEmailInput] = useState('');
   const [error, setError] = useState('');
@@ -226,7 +226,6 @@ const CartPage = () => {
                 <h2>{item.product.name}</h2>
               </div>
               <p>Tamaño: {item.size || 'Normal'}</p>
-              <p>Color: {item.color || 'Normal'}</p>
               <p>Cantidad: {item.quantity}</p>
               <div className='cart-item-details-price-delete'>
                 <p>{item.product.price.toFixed(2)} EUR</p>

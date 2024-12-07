@@ -1,9 +1,10 @@
 // src/components/ProductItem.js  
 import React from 'react';
 import './admin.css';
+//import { config } from '../config';
 
-const ProductItem = ({ product, onEdit, onDelete }) => {
-    
+const ProductItem = ({ product, onEdit, onDelete, config }) => {
+
     // Usa las rutas de las imágenes directamente en el src de las etiquetas <img>
     const images = product.images && product.images.length > 0
         ? product.images
@@ -11,20 +12,18 @@ const ProductItem = ({ product, onEdit, onDelete }) => {
 
     return (
         <li className="admin-list-item">
-            <h3>{product.name}</h3>
-            <p>{product.category}</p>
-            <p>{product.description}</p>
-            <p>{product.price}€</p>
-            <p>Tamaño: {product.size}</p>
-            <p>Color: {product.color}</p>
+            <div className="product-header">
+                <h3>{product.name}</h3>
+                <p>{product.price}€</p>
+            </div>
             <div>
                 {images.length > 0 ? (
                     images.map((src, index) => (
-                        <img 
-                          key={index} 
-                          src={src} 
-                          alt={`${product.name} - ${index + 1}`} 
-                          className="product-image"
+                        <img
+                            key={index}
+                            src={`${config.apiUrl}${src}`}
+                            alt={`${product.name} - ${index + 1}`}
+                            className="product-image"
                         />
                     ))
                 ) : (

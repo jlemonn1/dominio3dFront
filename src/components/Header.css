@@ -4,8 +4,12 @@
 }
 
 .header {
-    background-color: var(--color-banner) !important;
-    color: var(--color-text-banner) !important;
-    text-align: center;
-    padding: 10px;
-  }
+
+  color: var(--color-text-banner) !important;
+  text-align: center;
+  padding: 10px;
+}
+
+.rfm-marquee {
+  background-color: var(--color-banner) !important;
+}
