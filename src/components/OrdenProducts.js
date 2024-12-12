@@ -61,7 +61,7 @@ const OrdenProducts = ({config}) => {
             <ProductCard 
               title={product.name}
               price={product.price}
-              image={`${apiUrl}${product.images[0]}`} // Cambiado para usar la URL del servidor
+              image={`${product.images[0]}`} // Cambiado para usar la URL del servidor
               onClick={() => handleProductClick(product.id)} // Llama a handleProductClick con el ID del producto
             />
           </div>

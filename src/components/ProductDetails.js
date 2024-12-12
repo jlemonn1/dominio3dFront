@@ -242,10 +242,10 @@ const ProductDetails = ({ config }) => {
                 {product.images.map((imageUrl, index) => (
                   <div key={index}>
                     <img
-                      src={`${config.apiUrl}${imageUrl}`}
+                      src={`${imageUrl}`}
                       alt={`${product.name} - ${index + 1}`}
                     />
-                    <div className="zoom-icon" onClick={() => openZoomModal(`${config.apiUrl}${imageUrl}`)}>
+                    <div className="zoom-icon" onClick={() => openZoomModal(`${imageUrl}`)}>
                       <FaSearchPlus size={24} />
                     </div>
                   </div>
@@ -255,10 +255,10 @@ const ProductDetails = ({ config }) => {
               // Solo una imagen, no usar slider
               <div>
                 <img
-                  src={`${config.apiUrl}${product.images[0]}`}
+                  src={`${product.images[0]}`}
                   alt={`${product.name}`}
                 />
-                <div className="zoom-icon" onClick={() => openZoomModal(`${config.apiUrl}${product.images[0]}`)}>
+                <div className="zoom-icon" onClick={() => openZoomModal(`${product.images[0]}`)}>
                   <FaSearchPlus size={24} />
                 </div>
               </div>
@@ -347,7 +347,7 @@ const ProductDetails = ({ config }) => {
                 price={relatedProduct.price}
                 image={
                   relatedProduct.images && relatedProduct.images.length > 0
-                    ? `${config.apiUrl}${relatedProduct.images[0]}` // Usar la URL de la imagen almacenada
+                    ? `${relatedProduct.images[0]}` // Usar la URL de la imagen almacenada
                     : '' // Si no hay imagen, dejar vacío
                 }
                 onClick={() => handleProductClick(relatedProduct.id)}

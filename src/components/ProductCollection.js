@@ -88,7 +88,7 @@ const ProductCollection = ({ config }) => {
                   <ProductCard 
                     title={product.name}
                     price={product.price}
-                    image={`${apiUrl}${product.images[0] || ''}`}
+                    image={`${product.images[0] || ''}`}
                     onClick={() => handleProductClick(product.id)}
                   />
                 </div>

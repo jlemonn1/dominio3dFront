@@ -5,6 +5,22 @@ import axios from 'axios';
 import './admin.css';
 import ClipLoader from 'react-spinners/ClipLoader'; // Ejemplo de spinner
 
+import { getStorage, ref as storageRef, uploadBytes, getDownloadURL, deleteObject } from "firebase/storage"; // Firebase
+import { initializeApp } from "firebase/app"; // Firebase
+
+const firebaseConfig = {
+    apiKey: "AIzaSyAKYBIEHieGaIr9Yl7BA-yZu6ufRaE271k",
+    authDomain: "annubis-web-storage.firebaseapp.com",
+    projectId: "annubis-web-storage",
+    storageBucket: "annubis-web-storage.firebasestorage.app",
+    messagingSenderId: "137386375071",
+    appId: "1:137386375071:web:a370e57b4c5521ac726faa",
+    measurementId: "G-Y001MQMZFL"
+  };
+
+const firebaseApp = initializeApp(firebaseConfig);
+const storage = getStorage(firebaseApp);
+
 const ProductForm = forwardRef(({ productToEdit, onSave, config }, ref) => {
     const apiUrl = config.apiUrl;
     const [product, setProduct] = useState({
@@ -25,6 +41,8 @@ const ProductForm = forwardRef(({ productToEdit, onSave, config }, ref) => {
     const [editingVariantIndex, setEditingVariantIndex] = useState(null);
 
     const formRef = useRef(null);
+
+    
 
     useImperativeHandle(ref, () => ({
         scrollIntoView: () => {
@@ -89,6 +107,8 @@ const ProductForm = forwardRef(({ productToEdit, onSave, config }, ref) => {
     };
 
     const handleFileChange = async (e) => {
+
+        console.log("Estoy comprimiendo");
         const files = Array.from(e.target.files);
         const totalSize = files.reduce((acc, file) => acc + file.size, 0);
 
@@ -97,13 +117,16 @@ const ProductForm = forwardRef(({ productToEdit, onSave, config }, ref) => {
             return;
         }
 
-        const compressedFiles = await Promise.all(files.map(file => imageCompression(file, {
-            maxSizeMB: 1,
-            maxWidthOrHeight: 1920,
-            useWebWorker: true,
-        })));
+        //const compressedFiles = await Promise.all(files.map(file => imageCompression(file, {
+        //    maxSizeMB: 1,
+        //    maxWidthOrHeight: 1920,
+        //    useWebWorker: true,
+        //})));
 
-        setSelectedFiles(compressedFiles);
+
+
+        setSelectedFiles(files);
+        console.log("SeleccionadoS");
     };
 
     const handleVariantChange = (field, value) => {
@@ -144,44 +167,65 @@ const ProductForm = forwardRef(({ productToEdit, onSave, config }, ref) => {
     };
 
     const uploadFiles = async (productId, files) => {
-        const formData = new FormData();
-        files.forEach(file => formData.append('images', file));
-
-        const url = `${apiUrl}/api/products/${productId}/images`;
-
         try {
-            const response = await axios.post(url, formData, { headers: { 'Content-Type': 'multipart/form-data' } });
-            return response.data;
+            console.log("Estoy subiendo imagenes");
+            
+            const uploadedUrls = await Promise.all(
+                Array.from(files).map(async (file) => {
+                    const fileStorageRef = storageRef(storage, `products/${productId}/${file.name}`);
+                    await uploadBytes(fileStorageRef, file);
+                    return await getDownloadURL(fileStorageRef);
+                })
+            );
+
+            console.log("Estoy aqui");
+    
+            const url = `${apiUrl}/api/products/${productId}/images`;
+    
+            await fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(uploadedUrls)
+            });
         } catch (error) {
+            console.error('Error al subir archivos:', error);
             throw new Error('Error al subir archivos: ' + error.message);
         }
     };
-
+    
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
         setErrorMessage('');
-
-        // Filtrar variantes incompletas (sin color o tamaño)
+    
         const cleanedVariants = product.variants.filter(variant => variant.stock);
-
+    
         try {
             let productId;
-            // Actualiza el producto con las variantes filtradas
             const productToSave = { ...product, variants: cleanedVariants };
-
+    
             if (productToEdit) {
-                const response = await axios.put(`${apiUrl}/api/products/${productToEdit.id}`, productToSave);
-                productId = response.data.id;
+                const response = await fetch(`${apiUrl}/api/products/${productToEdit.id}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(productToSave)
+                });
+                const responseData = await response.json();
+                productId = responseData.id;
             } else {
-                const response = await axios.post(`${apiUrl}/api/products`, productToSave);
-                productId = response.data.id;
+                const response = await fetch(`${apiUrl}/api/products`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(productToSave)
+                });
+                const responseData = await response.json();
+                productId = responseData.id;
             }
-
+    
             if (selectedFiles.length > 0) {
                 await uploadFiles(productId, selectedFiles);
             }
-
+    
             onSave();
             resetForm();
         } catch (error) {
@@ -190,6 +234,7 @@ const ProductForm = forwardRef(({ productToEdit, onSave, config }, ref) => {
             setLoading(false);
         }
     };
+    
 
 
     return (

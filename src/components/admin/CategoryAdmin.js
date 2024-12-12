@@ -3,7 +3,22 @@ import { FaEdit, FaTrash } from 'react-icons/fa'; // Importa los íconos
 import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Button, TextField } from '@mui/material';
 import imageCompression from 'browser-image-compression';
 import ClipLoader from 'react-spinners/ClipLoader'; // Ejemplo de spinner
+import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from "firebase/storage"; // Firebase
+import { initializeApp } from "firebase/app"; // Firebase
 
+const firebaseConfig = {
+    apiKey: "AIzaSyAKYBIEHieGaIr9Yl7BA-yZu6ufRaE271k",
+    authDomain: "annubis-web-storage.firebaseapp.com",
+    projectId: "annubis-web-storage",
+    storageBucket: "annubis-web-storage.firebasestorage.app",
+    messagingSenderId: "137386375071",
+    appId: "1:137386375071:web:a370e57b4c5521ac726faa",
+    measurementId: "G-Y001MQMZFL"
+};
+
+// Inicializa Firebase
+const firebaseApp = initializeApp(firebaseConfig);
+const storage = getStorage(firebaseApp);
 
 const CategoryAdmin = ({ config }) => {
     const apiUrl = config.apiUrl;
@@ -14,10 +29,10 @@ const CategoryAdmin = ({ config }) => {
     const [editCategory, setEditCategory] = useState(null);
     const [selectedFile, setSelectedFile] = useState(null);
     const [confirmDialogOpen, setConfirmDialogOpen] = useState(false);
-    const [categoryIdToDelete, setCategoryIdToDelete] = useState(null);  // Aquí solo guardaremos el ID~
+    const [categoryIdToDelete, setCategoryIdToDelete] = useState(null);
     const [loadingImage, setLoadingImage] = useState(false);
 
-    const formRef = useRef(null); // Crear la referencia para el formulario
+    const formRef = useRef(null);
 
     const fetchCategories = async () => {
         try {
@@ -105,7 +120,6 @@ const CategoryAdmin = ({ config }) => {
         setNewCategory({ category: category.category, subCategory: category.subCategory, imgUrl: category.imgUrl });
         setEditCategory(category);
 
-        // Desplazar la vista hacia el formulario de edición
         if (formRef.current) {
             formRef.current.scrollIntoView({ behavior: 'smooth' });
         }
@@ -116,40 +130,44 @@ const CategoryAdmin = ({ config }) => {
 
         try {
             setLoadingImage(true);
-            // Opciones para la compresión
+
             const options = {
-                maxSizeMB: 0.25, // Tamaño máximo en MB
-                useWebWorker: true, // Usar WebWorker para compresión en segundo plano
+                maxSizeMB: 5.5,
+                useWebWorker: true,
             };
 
-            // Comprimir la imagen
             const compressedFile = await imageCompression(selectedFile, options);
 
-            // Subir la imagen comprimida
-            const formData = new FormData();
-            formData.append('image', compressedFile);
+            const storageRef = ref(storage, `categories/${editCategory.id}`);
+            await uploadBytes(storageRef, compressedFile);
+
+            const downloadURL = await getDownloadURL(storageRef);
+
+            setNewCategory({ ...newCategory, imgUrl: downloadURL });
 
             const response = await fetch(`${apiUrl}/api/category/${editCategory.id}/image`, {
                 method: 'POST',
-                body: formData,
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ imgUrl: downloadURL }),
             });
 
             if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
 
             const updatedCategory = await response.json();
             setCategories(categories.map(cat => cat.id === updatedCategory.id ? updatedCategory : cat));
-            setNewCategory({ ...newCategory, imgUrl: updatedCategory.imgUrl });
         } catch (err) {
             setError(err.message);
         } finally {
-            setLoadingImage(false); // Desactivar el spinner al finalizar la carga
+            setLoadingImage(false);
         }
     };
-
 
     const handleRemoveImage = async () => {
         if (!editCategory) return;
         try {
+            const storageRef = ref(storage, `categories/${editCategory.id}`);
+            await deleteObject(storageRef);
+
             const response = await fetch(`${apiUrl}/api/category/${editCategory.id}/remove-image`, {
                 method: 'PUT',
             });
@@ -173,7 +191,7 @@ const CategoryAdmin = ({ config }) => {
     return (
         <div className='category-manager-admin' ref={formRef}>
             <h3>Administrar Categorías</h3>
-            <form onSubmit={handleSubmit} className='category-form'> {/* Añade la referencia al formulario */}
+            <form onSubmit={handleSubmit} className='category-form'>
                 <input
                     type='text'
                     name='category'
@@ -207,22 +225,17 @@ const CategoryAdmin = ({ config }) => {
                         !newCategory.imgUrl ? (
                             <div>
                                 <input type='file' onChange={handleFileChange} className='file-input' />
-                                <div className="loading-spinner">
-                                    <ClipLoader color={"#123abc"} loading={loadingImage} size={35} />
-                                </div>
                                 <button onClick={handleImageUpload} className='upload-btn'>Subir Imagen</button>
-                                <ClipLoader color={"#123abc"} loading={loading} size={35} />
                             </div>
                         ) : (
                             <div className='image-preview'>
-                                <img src={`${apiUrl}${newCategory.imgUrl}`} alt={newCategory.category} className='current-image' />
+                                <img src={newCategory.imgUrl} alt={newCategory.category} className='current-image' />
                                 <button onClick={handleRemoveImage} className='remove-image-btn'>Eliminar Imagen</button>
                             </div>
                         )
                     )}
                 </div>
             )}
-
 
             <div className='category-list'>
                 {Object.keys(groupedCategories).map(category => (
@@ -232,7 +245,7 @@ const CategoryAdmin = ({ config }) => {
                             {groupedCategories[category].map(cat => (
                                 <li key={cat.id} className='subcategory-item'>
                                     <p className='subcategory-name'>{cat.subCategory || 'Sin subcategoría'}</p>
-                                    {cat.imgUrl && <img src={`${apiUrl}${cat.imgUrl}`} alt={cat.category} className='subcategory-image' />}
+                                    {cat.imgUrl && <img src={cat.imgUrl} alt={cat.category} className='subcategory-image' />}
                                     <div className='action-buttons'>
                                         <FaEdit onClick={() => handleEdit(cat)} className='edit-icon' />
                                         <FaTrash onClick={() => confirmDelete(cat.id)} className='delete-icon' />

@@ -92,7 +92,7 @@ const Locker = ({ config }) => {
           >
             <ProductCard 
               title={product.name}
-              image={`${apiUrl}${product.images[0]}`} // Asegúrate de que el array images exista y contenga elementos
+              image={`${product.images[0]}`} // Asegúrate de que el array images exista y contenga elementos
               onClick={() => handleProductClick(product.id)}
             />
           </div>

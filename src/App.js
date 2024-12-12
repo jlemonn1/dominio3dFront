@@ -26,7 +26,7 @@ import CategoryList from './components/CategoryList';
 
 // Config inicial
 const initialConfig = {
-  apiUrl: 'https://annubis.co',
+  apiUrl: 'http://localhost:8080',
   appName: 'annubis',
   correo: 'annubis.co.info@gmail.com',
   password : 'Dacha33',

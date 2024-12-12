@@ -39,7 +39,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 // Renderizar la aplicación dentro de BrowserRouter para usar el enrutamiento
 root.render(
   //<React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter >
       <App />
       <ToastContainer />
     </BrowserRouter>

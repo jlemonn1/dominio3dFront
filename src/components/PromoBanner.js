@@ -17,7 +17,7 @@ const PromoBanner = ({ config }) => {
         const response = await axios.get(`${apiUrl}/api/carousel`);
         const imagesWithFullUrl = response.data.map(image => ({
           ...image,
-          imageUrl: `${apiUrl}${image.imageUrl}`,
+          imageUrl: `${image.imageUrl}`,
         }));
         setImages(imagesWithFullUrl);
       } catch (error) {

@@ -21,7 +21,7 @@ const ProductItem = ({ product, onEdit, onDelete, config }) => {
                     images.map((src, index) => (
                         <img
                             key={index}
-                            src={`${config.apiUrl}${src}`}
+                            src={`${src}`}
                             alt={`${product.name} - ${index + 1}`}
                             className="product-image"
                         />

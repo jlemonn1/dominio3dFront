@@ -103,7 +103,7 @@ const Best = ({ config }) => {
               <ProductCard
                 title={product.name}
                 price={product.price}
-                image={`${apiUrl}${product.images[0]}`} // Asegúrate de que el array images exista y contenga elementos
+                image={`${product.images[0]}`} // Asegúrate de que el array images exista y contenga elementos
                 onClick={() => handleProductClick(product.id)}
               />
             </div>

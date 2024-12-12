@@ -37,7 +37,7 @@ const Categories = ({ config }) => {
         {Object.keys(categories).length > 0 ? (
           Object.entries(categories).map(([subCategory, urlImg], index) => (
             <div key={index} className="category-card" onClick={() => window.location.href = `/category/${subCategory}`}>
-              <div className="category-background" style={{ backgroundImage: `url(${config.apiUrl}${urlImg})` }}>
+              <div className="category-background" style={{ backgroundImage: `url(${urlImg})` }}>
                 <div className="category-info">
                   <h3 className="category-title-main">{subCategory}</h3>
                 </div>

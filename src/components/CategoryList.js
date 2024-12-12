@@ -27,7 +27,7 @@ const CategoryList = ({ config }) => {
             <div
               key={index}
               className="category-item"
-              style={{ backgroundImage: `url(${config.apiUrl}${urlImg})` }}
+              style={{ backgroundImage: `url(${urlImg})` }}
               onClick={() => window.location.href = `/category/${subCategory}`}
             >
               <div className="category-overlay">

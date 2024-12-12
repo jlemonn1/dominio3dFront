@@ -213,7 +213,7 @@ const CartPage = ({config}) => {
           <div key={index} className="cart-item">
             {item.product.images && item.product.images.length > 0 ? (
               <img
-                src={`${apiUrl}${item.product.images[0]}`} // Cambia aquí para usar la URL de tu servidor
+                src={`${item.product.images[0]}`} // Cambia aquí para usar la URL de tu servidor
                 alt={item.product.name}
                 className="cart-item-image"
               />

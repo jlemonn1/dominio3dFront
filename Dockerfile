@@ -25,8 +25,8 @@ FROM nginx:alpine
 # Copia los archivos del build generado desde el contenedor anterior
 COPY --from=build-stage /app/build /usr/share/nginx/html
 
-# Configura el archivo de configuración de Nginx para hacer proxy y servir imágenes
-COPY serv-dom.conf /etc/nginx/nginx.d/serv-dom.conf
+# Copia el archivo de configuración de Nginx al archivo principal de configuración
+COPY nginx.conf /etc/nginx/nginx.conf
 
 # Expone el puerto 80 para servir la aplicación
 EXPOSE 80
